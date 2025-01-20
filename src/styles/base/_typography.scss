@@ -1,0 +1,32 @@
+
+$font-size-xxs: 10px;
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 24px;
+
+$line-height-xxs: 16px;
+$line-height-xs: 18px;
+$line-height-sm: 20px;
+$line-height-md: 24px;
+$line-height-lg: 28px;
+$line-height-xl: 30px;
+
+$font-weight-r: 400;
+$font-weight-m: 500;
+$font-weight-semi: 600;
+$font-weight-bold: 700;
+
+
+.ellipsis1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.guide_text{
+  font-size: $font-size-xs;
+  line-height:$line-height-sm ;
+  color: #D92D20;
+}
