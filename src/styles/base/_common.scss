@@ -1,12 +1,28 @@
 
-section {
-  position: relative;
+body {
+  background-color: #000;
+  color: #e4e4e7;
+}
+
+.wrapper {
+  max-width: 1380px;
+  width: 100%;
+  padding: 0 16px;
+  margin: 0 auto;
   min-height: 100vh;
 }
 
-.inner {
-  padding: 90px 16px 100px;
+.layout_body {
+  display: flex;
+  align-content: center;
+  padding-top: 68px;
 }
+
+
+.inner {
+
+}
+
 
 .btn_group {
   display: flex;
