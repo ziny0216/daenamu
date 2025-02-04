@@ -1,0 +1,12 @@
+
+.post_container {
+    border-bottom: 1px solid var(--default-100);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 8px;
+}
+
+.post_container:first-child {
+    padding-top: 0;
+}
