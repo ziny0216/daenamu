@@ -1,4 +1,4 @@
-import styles from '@/components/layout/Layout.module.scss';
+import styles from '@/components/layout/Layout.module.css';
 import Link from 'next/link';
 
 export function SideMenu() {
