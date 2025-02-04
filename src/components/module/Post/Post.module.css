@@ -10,3 +10,30 @@
 .post_container:first-child {
     padding-top: 0;
 }
+
+.action_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.action_box .right_content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.img_list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.img_list .img_box {
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+}
+
+.img_list .img_box img {
+    object-fit: contain;
+}

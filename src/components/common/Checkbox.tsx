@@ -4,20 +4,18 @@ import styled from 'styled-components';
 import { InputProps } from '@/types/components/common';
 
 const StyledInputWrapper = styled.div`
-  display: flex;
-  gap: 4px;
-
   label {
     cursor: pointer;
     vertical-align: middle;
+    display: flex;
+    align-items: center;
 
     &:before {
       content: '';
       display: block;
       width: 24px;
       height: 24px;
-      flex: 0 0 24px;
-      background-size: contain;
+      border: 2px solid var(--default-700);
       vertical-align: middle;
       margin-right: 4px;
     }
@@ -25,20 +23,22 @@ const StyledInputWrapper = styled.div`
 `;
 
 const StyledCheckbox = styled.input<InputProps>`
-  input {
-    display: none;
-  }
+  display: none;
 
-  input[type='checkbox']:checked + label:before {
+  &:checked + label:before {
     content: '';
-    background-size: contain;
   }
 `;
 
-export default function Checkbox({ label, id, ...props }: InputProps) {
+export default function Checkbox({ label, id, checked, onChange }: InputProps) {
   return (
     <StyledInputWrapper>
-      <StyledCheckbox id={id} type="checkbox" {...props} />
+      <StyledCheckbox
+        id={id}
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+      />
       {label && <label htmlFor={id}>{label}</label>}
     </StyledInputWrapper>
   );

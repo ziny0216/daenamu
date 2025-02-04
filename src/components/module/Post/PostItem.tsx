@@ -2,6 +2,7 @@ import styles from '@/components/module/Post/Post.module.css';
 import StyledProfile from '@/components/module/Profile/Profile';
 import Link from 'next/link';
 import PostActionBar from '@/components/module/Post/PostActionBar';
+import PostImageList from '@/components/module/Post/PostImageList';
 
 const user = {
   profile_img: 'https://picsum.photos/32/32',
@@ -19,24 +20,8 @@ export default function PostItem() {
         합의했다. 교재에는 2020년 국가지질공원 지정에 이어 올해 유네스코
         세계지질공원 등재를 앞둔 단양지역의 지질 특징 등을 담을 예정이다.
       </p>
-      <ul>
-        <li>
-          <img src="https://picsum.photos/32/32" alt="이미지" />
-        </li>
-        <li>
-          <img src="https://picsum.photos/32/32" alt="이미지" />
-        </li>
-        <li>
-          <img src="https://picsum.photos/32/32" alt="이미지" />
-        </li>
-        <li>
-          <img src="https://picsum.photos/32/32" alt="이미지" />
-        </li>
-        <li>
-          <img src="https://picsum.photos/32/32" alt="이미지" />
-        </li>
-      </ul>
       <Link href={'/'}>더보기</Link>
+      <PostImageList />
       <PostActionBar />
     </div>
   );
