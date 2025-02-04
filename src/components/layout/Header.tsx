@@ -1,6 +1,7 @@
 import styles from '@/components/layout/Layout.module.css';
 import Link from 'next/link';
-import StyledProfile from '@/components/module/Profile/Profile';
+import Profile from '@/components/module/Profile/Profile';
+import Input from '@/components/common/Input';
 
 const user = {
   profile_img: 'https://picsum.photos/32/32',
@@ -16,11 +17,9 @@ export function Header() {
           대나무숲
         </Link>
         <div className={styles.right_content}>
-          <div>
-            <input type="search" placeholder="검색어 입력" />
-            <button type="button">검색어</button>
-          </div>
-          <StyledProfile user={user} />
+          <Input placeholder="검색어 입력" />
+
+          <Profile user={user} />
         </div>
       </div>
     </header>
