@@ -29,7 +29,7 @@ const Profile = styled.div.withConfig({
   .nickname {
     font-size: 14px;
     line-height: 20px;
-    font-weight: 500;
+    font-weight: 600;
   }
 `;
 
