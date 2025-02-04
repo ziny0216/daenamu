@@ -1,4 +1,4 @@
-import '@/styles/main.scss';
+import '@/styles/main.css';
 import StoreProvider from '@/components/StoreProvider';
 import StyledComponentsRegistry from '@/components/StyledComponentsRegistry';
 import { Header } from '@/components/layout/Header';

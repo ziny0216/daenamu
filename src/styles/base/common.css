@@ -1,0 +1,91 @@
+
+body {
+    background-color: #000;
+    color: #e4e4e7;
+}
+
+.wrapper {
+    max-width: 1240px;
+    width: 100%;
+    padding: 0 16px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.layout_body {
+    display: flex;
+    padding-top: 80px;
+    min-height: 100vh;
+    gap: 24px;
+}
+
+
+.inner {
+
+}
+
+
+.btn_group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+
+}
+
+.btn_group.full {
+    gap: 8px;
+}
+
+.btn_group.full button {
+    flex: 1;
+
+}
+
+.ml_auto {
+    margin-left: auto;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.ellipsis1 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.guide_text {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-sm);
+    color: #D92D20;
+}
+
+.show-enter {
+    transform: translateY(0);
+    opacity: 0;
+}
+
+.show-enter-active {
+    transform: translateY(-96px);
+    opacity: 1;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.show-enter-done {
+    transform: translateY(-96px);
+    opacity: 1;
+}
+
+
+.show-exit {
+    transform: translateY(-96px);
+    opacity: 1;
+}
+
+.show-exit-active {
+    transform: translateY(-96px);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}

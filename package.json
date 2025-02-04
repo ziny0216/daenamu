@@ -16,7 +16,6 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
-    "scss-reset": "^1.4.6",
     "styled-components": "^6.1.14"
   },
   "devDependencies": {
@@ -29,7 +28,6 @@
     "eslint-config-next": "15.1.5",
     "eslint-config-prettier": "^10.0.1",
     "prettier": "^3.4.2",
-    "sass": "^1.83.4",
     "typescript": "^5"
   }
 }
