@@ -1,23 +1,15 @@
 import styles from '@/components/module/Post/Post.module.css';
+import { FileData } from '@/types/components/common';
 
-export default function PostImageList() {
+export default function PostImageList({ files = [] }: { files?: FileData[] }) {
+  console.log(files);
   return (
     <ul className={styles.img_list}>
-      <li className={styles.img_box}>
-        <img src="https://picsum.photos/32/32" alt="이미지" />
-      </li>
-      <li className={styles.img_box}>
-        <img src="https://picsum.photos/32/32" alt="이미지" />
-      </li>
-      <li className={styles.img_box}>
-        <img src="https://picsum.photos/32/32" alt="이미지" />
-      </li>
-      <li className={styles.img_box}>
-        <img src="https://picsum.photos/32/32" alt="이미지" />
-      </li>
-      <li className={styles.img_box}>
-        <img src="https://picsum.photos/32/32" alt="이미지" />
-      </li>
+      {files.map((item, index) => (
+        <li className={styles.img_box} key={index}>
+          <img src={item.new_filepath as string} alt={item.org_filename} />
+        </li>
+      ))}
     </ul>
   );
 }

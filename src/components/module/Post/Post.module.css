@@ -32,8 +32,11 @@
 .img_list .img_box {
     border-radius: var(--border-radius-sm);
     overflow: hidden;
+    width: 32px;
+    height: 32px;
 }
 
 .img_list .img_box img {
+
     object-fit: contain;
 }
