@@ -18,7 +18,7 @@ const inputSizes = {
 const inputColor = {
   default: {
     border: '1px solid var(--default-200)',
-    backgroundColor: 'transparent',
+    backgroundColor: 'var(--background-color)',
   },
 };
 

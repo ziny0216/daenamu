@@ -12,15 +12,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="wrapper">
-          <Header />
-          <div className="layout_body">
-            <SideMenu />
-            <StyledComponentsRegistry>
-              <StoreProvider>{children}</StoreProvider>
-            </StyledComponentsRegistry>
-          </div>
-        </div>
+        <StyledComponentsRegistry>
+          <StoreProvider>
+            <div className="wrapper">
+              <Header />
+              <div className="layout_body">
+                <SideMenu />
+
+                {children}
+              </div>
+            </div>
+          </StoreProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
