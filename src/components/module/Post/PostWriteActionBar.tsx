@@ -6,7 +6,11 @@ import styles from '@/components/module/Post/Post.module.css';
 import PictureIcon from '@/assets/icons/icon-white-picture.svg';
 import { ChangeEvent, useState } from 'react';
 
-export default function PostWriteActionBar() {
+export default function PostWriteActionBar({
+  disabled,
+}: {
+  disabled: boolean;
+}) {
   const [isChecked, setIsChecked] = useState(false);
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
@@ -23,7 +27,7 @@ export default function PostWriteActionBar() {
           checked={isChecked}
           onChange={onChange}
         />
-        <Button disabled size={'sm'} title={'POST'}></Button>
+        <Button disabled={disabled} size={'sm'} title={'POST'}></Button>
       </div>
     </div>
   );
