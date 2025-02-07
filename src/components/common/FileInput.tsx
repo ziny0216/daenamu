@@ -53,7 +53,6 @@ export default function FileInput({
         const previewArr: FileData[] = filesArr.map(file => ({
           new_filepath: filesDataUrls[processedFiles.indexOf(file)],
           org_filename: file.name,
-          file_seq: processedFiles.indexOf(file),
         }));
         e.target.value = '';
         if (handleFileChange) {
