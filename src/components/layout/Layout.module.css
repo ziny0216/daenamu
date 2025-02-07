@@ -28,7 +28,7 @@
 .default_header .right_content {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
 }
 
 .default_aside {

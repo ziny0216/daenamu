@@ -18,7 +18,6 @@ export default function RootLayout({
               <Header />
               <div className="layout_body">
                 <SideMenu />
-
                 {children}
               </div>
             </div>
