@@ -2,7 +2,7 @@
 import styles from '@/components/module/Post/Post.module.css';
 import { FileData } from '@/types/components/common';
 import Button from '@/components/common/Button';
-
+import Image from 'next/image';
 import DeleteBtn from '@/assets/icons/icon-circle.svg';
 
 export default function PostImageList({
@@ -26,7 +26,12 @@ export default function PostImageList({
                 onDeleteImg && onDeleteImg(item.file_seq || null, index)
               }
             />
-            <img src={item.new_filepath as string} alt={item.org_filename} />
+            <Image
+              fill
+              objectFit={'cover'}
+              src={item.new_filepath as string}
+              alt={item.org_filename}
+            />
           </li>
         ))}
       </ul>

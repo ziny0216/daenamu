@@ -5,7 +5,7 @@ import PostActionBar from '@/components/module/Post/PostWriteActionBar';
 import styles from '@/components/module/Post/Post.module.css';
 import Textarea from '@/components/common/TextArea';
 import PostImageList from '@/components/module/Post/PostImageList';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { FileData } from '@/types/components/common';
 
 const user = {
@@ -20,6 +20,10 @@ export default function PostWrite() {
   const handlePostContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setPostContent(e.target.value);
   };
+
+  useEffect(() => {
+    console.log(deletedFiles);
+  }, [deletedFiles]);
   const handleFileChange = (data: FileData[]) => {
     setPreviewData(prev => [...prev, ...data]);
   };

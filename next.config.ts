@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        pathname: '/32/32',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

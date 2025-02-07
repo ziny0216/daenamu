@@ -38,12 +38,6 @@
     position: relative;
 }
 
-.img_list .img_box img {
-    object-fit: cover;
-    display: block;
-    width: 100%;
-    height: 100%;
-}
 
 .img_list .img_box .delete_btn {
     position: absolute;
