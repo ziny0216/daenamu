@@ -50,10 +50,25 @@ body {
     flex: 1;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .ellipsis1 {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.ellipse3 {
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
 }
 
 .guide_text {
