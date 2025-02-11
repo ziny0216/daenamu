@@ -2,22 +2,51 @@
 import styled from 'styled-components';
 import { TextareaProps } from '@/types/components/common';
 
-const StyledTextarea = styled.textarea`
+const textareaSizes = {
+  sm: {
+    fontSize: 'var(--font-size-sm)',
+    lineHeight: 'var(--line-height-sm)',
+  },
+  md: {
+    fontSize: 'var(--font-md)',
+    lineHeight: 'var(--line-height-md)',
+  },
+};
+const StyledTextareaWrapper = styled.div`
   border-radius: var(--border-radius-sm);
   background-color: var(--content1);
   color: var(--foreground);
-  min-height: 100px;
   transition: background-color 0.3s ease-in-out;
-  padding: 8px 12px;
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-md);
-  resize: none;
+  padding: 16px;
+`;
 
+const StyledTextarea = styled.textarea<TextareaProps>`
+  background-color: var(--content1);
+  color: var(--foreground);
+  width: 100%;
+  resize: none;
+  padding-right: 8px;
+
+  ${({ inputSize = 'sm' }) => textareaSizes[inputSize]}
   &::-webkit-scrollbar {
-    display: none;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--default-100);
+    border-radius: var(--border-radius-lg);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--default-300);
+    border-radius: var(--border-radius-lg);
   }
 `;
 
 export default function Textarea(textarea: TextareaProps) {
-  return <StyledTextarea {...textarea} />;
+  return (
+    <StyledTextareaWrapper>
+      <StyledTextarea {...textarea} />
+    </StyledTextareaWrapper>
+  );
 }

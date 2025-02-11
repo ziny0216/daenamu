@@ -5,7 +5,9 @@ export default function Home() {
   return (
     <main>
       <PostWrite />
-      <PostItem />
+      <PostItem type={'list'} />
+      <PostItem type={'list'} />
+      <PostItem type={'list'} />
     </main>
   );
 }

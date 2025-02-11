@@ -38,7 +38,12 @@ export default function PostWrite() {
   return (
     <div className={styles.post_container}>
       <Profile user={user} />
-      <Textarea onChange={handlePostContent} placeholder="지금 내 생각은...?" />
+      <Textarea
+        inputSize={'md'}
+        rows={6}
+        onChange={handlePostContent}
+        placeholder="지금 내 생각은...?"
+      />
       <PostImageList onDeleteImg={handleDelete} files={previewData} />
       <PostActionBar
         disabled={!postContent}

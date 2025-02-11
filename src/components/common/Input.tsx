@@ -20,6 +20,11 @@ const inputColor = {
     border: '1px solid var(--default-200)',
     backgroundColor: 'var(--background-color)',
   },
+  bottomBorder: {
+    borderRadius: 0,
+    borderBottom: '1px solid var(--default-200)',
+    backgroundColor: 'var(--background-color)',
+  },
 };
 
 const StyledInputWrapper = styled.div`

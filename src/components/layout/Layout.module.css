@@ -8,6 +8,7 @@
     z-index: 1;
     left: 50%;
     transform: translateX(-50%);
+    background: var(--background);
 }
 
 .default_header .header_inner {

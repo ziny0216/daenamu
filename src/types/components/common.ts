@@ -8,12 +8,15 @@ import {
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   id?: string;
-  color?: 'default';
+  color?: 'default' | 'bottomBorder';
   inputSize?: 'sm' | 'md';
   isButton?: boolean;
 }
 
-export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement>;
+export interface TextareaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  inputSize?: 'sm' | 'md';
+}
 
 export interface ButtonProps {
   className?: string;
