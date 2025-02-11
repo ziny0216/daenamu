@@ -2,7 +2,6 @@ import '@/styles/main.css';
 import StoreProvider from '@/components/StoreProvider';
 import StyledComponentsRegistry from '@/components/StyledComponentsRegistry';
 import { Header } from '@/components/layout/Header';
-import { SideMenu } from '@/components/layout/SideMenu';
 
 export default function RootLayout({
   children,
@@ -16,10 +15,7 @@ export default function RootLayout({
           <StoreProvider>
             <div className="wrapper">
               <Header />
-              <div className="layout_body">
-                <SideMenu />
-                {children}
-              </div>
+              <div className="layout_body">{children}</div>
             </div>
           </StoreProvider>
         </StyledComponentsRegistry>

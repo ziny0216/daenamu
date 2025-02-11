@@ -13,15 +13,16 @@ body {
 }
 
 .layout_body {
-    display: flex;
+
     padding-top: 80px;
     min-height: 100vh;
-    gap: 24px;
+
 }
 
 
 .inner {
-
+    gap: 24px;
+    display: flex;
 }
 
 
