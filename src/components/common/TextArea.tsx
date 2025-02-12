@@ -20,14 +20,14 @@ const StyledTextareaWrapper = styled.div`
   padding: 16px;
 `;
 
-const StyledTextarea = styled.textarea<TextareaProps>`
+const StyledTextarea = styled.textarea<{ $inputSize?: 'sm' | 'md' }>`
   background-color: var(--content1);
   color: var(--foreground);
   width: 100%;
   resize: none;
   padding-right: 8px;
 
-  ${({ inputSize = 'sm' }) => textareaSizes[inputSize]}
+  ${({ $inputSize = 'sm' }) => textareaSizes[$inputSize]}
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -43,10 +43,10 @@ const StyledTextarea = styled.textarea<TextareaProps>`
   }
 `;
 
-export default function Textarea(textarea: TextareaProps) {
+export default function Textarea({ inputSize, ...props }: TextareaProps) {
   return (
     <StyledTextareaWrapper>
-      <StyledTextarea {...textarea} />
+      <StyledTextarea $inputSize={inputSize} {...props} />
     </StyledTextareaWrapper>
   );
 }

@@ -1,7 +1,9 @@
+'use client';
 import styles from '@/components/layout/Layout.module.css';
 import Link from 'next/link';
 import Profile from '@/components/module/Profile/Profile';
-import Input from '@/components/common/Input';
+import SearchBar from '@/components/common/SearchBar';
+import { useRouter } from 'next/navigation';
 
 const user = {
   profile_img: 'https://picsum.photos/32/32',
@@ -10,6 +12,10 @@ const user = {
 };
 
 export function Header() {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/search?keyword=${'ddd'}`);
+  };
   return (
     <header className={styles.default_header}>
       <div className={styles.header_inner}>
@@ -17,8 +23,7 @@ export function Header() {
           대나무숲
         </Link>
         <div className={styles.right_content}>
-          <Input placeholder="검색어 입력" />
-
+          <SearchBar onButtonClick={handleClick} />
           <Profile user={user} />
         </div>
       </div>

@@ -1,13 +1,11 @@
 import PostWrite from '@/components/module/Post/PostWrite';
-import PostItem from '@/components/module/Post/PostItem';
+import PostList from '@/components/module/Post/PostList';
 
 export default function Home() {
   return (
     <main>
       <PostWrite />
-      <PostItem type={'list'} />
-      <PostItem type={'list'} />
-      <PostItem type={'list'} />
+      <PostList />
     </main>
   );
 }

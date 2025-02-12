@@ -40,7 +40,7 @@ const btnColor = {
 
 const iconSize = {
   xs: {
-    width: '24px',
+    width: 'ß',
     height: '24px',
   },
   sm: {
