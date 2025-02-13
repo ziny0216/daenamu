@@ -51,7 +51,7 @@ export default function Profile({ user, size = 'md' }: ProfileProps) {
     //  익명이 아닐때 해당 글쓴이 피드로
     console.log(user.is_anonymity, 'user.is_anonymity');
     if (!user.is_anonymity) {
-      router.push('/feed');
+      router.push('/feed/1');
     }
   };
   return (
