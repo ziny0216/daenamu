@@ -6,4 +6,5 @@ export interface User {
 
 export interface ProfileProps {
   user: User;
+  size?: 'md' | 'lg';
 }

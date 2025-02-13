@@ -4,14 +4,14 @@ import styles from '@/components/module/Post/Post.module.css';
 
 export default function PostList({
   keyword,
-  isHotPage = false,
+  isFeedPage = false,
 }: {
   keyword?: string;
-  isHotPage?: boolean;
+  isFeedPage?: boolean;
 }) {
   return (
     <>
-      {!keyword && <PostWrite />}
+      {!isFeedPage && <PostWrite />}
       {keyword && (
         <div className={styles.post_header}>
           <h2 className={styles.search_tot}>검색 결과 5건</h2>

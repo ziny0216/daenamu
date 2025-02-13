@@ -39,6 +39,10 @@
     height: 100%;
 }
 
+.default_aside + section {
+    width: calc(100% - 300px);
+}
+
 .default_aside .side_menu {
     display: flex;
     flex-direction: column;

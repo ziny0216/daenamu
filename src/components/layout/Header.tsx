@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 const user = {
   profile_img: 'https://picsum.photos/32/32',
   nickname: '조여진',
-  is_anonymity: true,
+  is_anonymity: false,
 };
 
 export function Header() {
