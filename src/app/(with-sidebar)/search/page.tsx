@@ -7,9 +7,5 @@ export default async function Page({
 }) {
   const { keyword } = await searchParams;
 
-  return (
-    <div>
-      <PostList keyword={keyword} />
-    </div>
-  );
+  return <PostList keyword={keyword} />;
 }
