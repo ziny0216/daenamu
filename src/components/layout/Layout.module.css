@@ -34,13 +34,24 @@
 
 .default_aside {
     padding: 8px 0;
-    max-width: 300px;
+    max-width: 240px;
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 128px);
+    position: sticky;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 80px;
 }
 
-.default_aside + section {
-    width: calc(100% - 300px);
+.default_aside .default_inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.default_aside button {
+    width: 100%;
 }
 
 .default_aside .side_menu {

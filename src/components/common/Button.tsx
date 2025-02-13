@@ -61,7 +61,11 @@ const StyledButton = styled('button').withConfig({
   shouldForwardProp: prop => prop !== 'isIcon',
 })<ButtonProps>`
   color: var(--foreground);
-  border-radius: var(--border-radius-sm);
+  border-radius: ${({ borderradius }) =>
+    borderradius === 'lg'
+      ? 'var(--border-radius-xl)'
+      : 'var(--border-radius-sm)'};
+
   transition: background-color 0.3s ease-in-out;
   font-weight: var(--font-weight-m);
 

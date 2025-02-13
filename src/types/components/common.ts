@@ -22,6 +22,7 @@ export interface ButtonProps {
   className?: string;
   title?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg';
+  borderradius?: 'lg' | 'md';
   color?: 'default' | 'transparent';
   disabled?: boolean;
   onClick?: () => void;
