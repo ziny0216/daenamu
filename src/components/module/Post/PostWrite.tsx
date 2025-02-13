@@ -40,7 +40,7 @@ export default function PostWrite() {
       <Profile user={user} />
       <Textarea
         inputSize={'md'}
-        rows={6}
+        rows={2}
         onChange={handlePostContent}
         placeholder="지금 내 생각은...?"
       />

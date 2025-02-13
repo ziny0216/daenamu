@@ -10,7 +10,7 @@ export function SideMenu() {
             <Link href={'/'}>🏠 HOME</Link>
           </li>
           <li>
-            <Link href={'/'}>🔥 HOT</Link>
+            <Link href={'/home/hot'}>🔥 HOT</Link>
           </li>
         </menu>
       </div>
