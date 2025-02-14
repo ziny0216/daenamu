@@ -20,6 +20,9 @@ body {
 
 }
 
+section {
+    width: 100%;
+}
 
 .inner {
     gap: 24px;

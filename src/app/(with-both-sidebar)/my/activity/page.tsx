@@ -12,12 +12,12 @@ export default function Page() {
     setTab(newTab);
   };
   return (
-    <>
+    <div>
       <div>
         <Button onClick={() => handleTab('comment')} title={'작성한 댓글'} />
         <Button onClick={() => handleTab('post')} title={'좋아요한 글'} />
       </div>
       <div>{tab === 'post' ? <PostItem type={'list'} /> : <CommentItem />}</div>
-    </>
+    </div>
   );
 }
