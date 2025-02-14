@@ -45,7 +45,11 @@ const StyledImageBox = styled.div<{ size: 'md' | 'lg' }>`
     overflow: hidden;
   }
 `;
-export default function Profile({ user, size = 'md' }: ProfileProps) {
+export default function Profile({
+  user,
+  size = 'md',
+  className,
+}: ProfileProps) {
   const router = useRouter();
   const handleProfileClick = () => {
     //  익명이 아닐때 해당 글쓴이 피드로
@@ -56,6 +60,7 @@ export default function Profile({ user, size = 'md' }: ProfileProps) {
   };
   return (
     <StyledProfile
+      className={className}
       size={size}
       onClick={handleProfileClick}
       is_anonymity={user.is_anonymity}

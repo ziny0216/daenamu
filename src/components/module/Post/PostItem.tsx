@@ -1,5 +1,5 @@
 import styles from '@/components/module/Post/Post.module.css';
-import StyledProfile from '@/components/module/Profile/Profile';
+import StyledProfile from '@/components/module/User/Profile';
 import PostActionBar from '@/components/module/Post/PostActionBar';
 import PostImageList from '@/components/module/Post/PostImageList';
 import Link from 'next/link';

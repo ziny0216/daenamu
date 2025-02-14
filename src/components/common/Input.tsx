@@ -38,7 +38,9 @@ const StyledInputWrapper = styled.div`
   }
 `;
 
-const StyledInput = styled.input<InputProps>`
+const StyledInput = styled.input.withConfig({
+  shouldForwardProp: prop => !['inputSize', 'isButton'].includes(prop),
+})<InputProps>`
   color: var(--foreground);
   border-radius: var(--border-radius-sm);
   transition: background-color 0.3s ease-in-out;

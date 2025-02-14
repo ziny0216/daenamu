@@ -1,4 +1,4 @@
-import Profile from '@/components/module/Profile/Profile';
+import Profile from '@/components/module/User/Profile';
 import styles from '@/components/module/Comment/Comment.module.css';
 
 const user = {

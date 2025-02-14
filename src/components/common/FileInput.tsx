@@ -18,8 +18,10 @@ export default function FileInput({
   type = 'file',
   id,
   handleFileChange,
+  className,
   icon: Icon,
 }: InputProps & {
+  className?: string;
   icon?: ElementType;
   handleFileChange: (file: FileData[]) => void;
 }) {
@@ -65,7 +67,7 @@ export default function FileInput({
   };
 
   return (
-    <StyledFileWrapper>
+    <StyledFileWrapper className={className}>
       <label htmlFor={id}>{Icon && <Icon />}</label>
       <StyledFileInput
         accept=".png,.jpg"

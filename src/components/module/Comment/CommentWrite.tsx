@@ -1,4 +1,4 @@
-import Profile from '@/components/module/Profile/Profile';
+import Profile from '@/components/module/User/Profile';
 import styles from '@/components/module/Comment/Comment.module.css';
 import Textarea from '@/components/common/TextArea';
 import Button from '@/components/common/Button';

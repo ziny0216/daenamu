@@ -1,6 +1,6 @@
 'use client';
 
-import Profile from '@/components/module/Profile/Profile';
+import Profile from '@/components/module/User/Profile';
 import PostActionBar from '@/components/module/Post/PostWriteActionBar';
 import styles from '@/components/module/Post/Post.module.css';
 import Textarea from '@/components/common/TextArea';

@@ -1,7 +1,7 @@
 'use client';
 import styles from '@/components/layout/Layout.module.css';
 import Link from 'next/link';
-import Profile from '@/components/module/Profile/Profile';
+import Profile from '@/components/module/User/Profile';
 import SearchBar from '@/components/common/SearchBar';
 import { useRouter } from 'next/navigation';
 
