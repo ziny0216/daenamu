@@ -46,3 +46,8 @@ export interface FileDelete {
   file_seq: number | null;
   idx: number;
 }
+
+export interface DefaultObj {
+  name: string;
+  value: string;
+}
