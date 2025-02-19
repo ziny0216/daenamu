@@ -52,3 +52,30 @@
     flex-direction: column;
     gap: 16px;
 }
+
+
+.sign_container {
+    height: calc(100vh - 128px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign_container .sign_inner {
+    background-color: var(--default-100);
+    padding: 32px 16px;
+    border-radius: var(--border-radius-md);
+    max-width: 768px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.sign_container .sign_inner > div, .sign_container .sign_inner button {
+    flex: 1;
+}
+
+.sign_container .form_group > div:last-child {
+    margin-top: 0;
+}

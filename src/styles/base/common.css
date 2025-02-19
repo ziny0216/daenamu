@@ -53,6 +53,11 @@ section {
     flex-direction: column;
 }
 
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
 .flex-1 {
     flex: 1;
 }
