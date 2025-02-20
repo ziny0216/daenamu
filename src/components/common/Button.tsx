@@ -36,11 +36,17 @@ const btnColor = {
   transparent: {
     backgroundColor: 'transparent',
   },
+  foreground: {
+    backgroundColor: 'var(--foreground)',
+    hover: {
+      backgroundColor: 'var(--default-700)',
+    },
+  },
 };
 
 const iconSize = {
   xs: {
-    width: 'ß',
+    width: '24px',
     height: '24px',
   },
   sm: {

@@ -1,5 +1,6 @@
-import Button from '@/components/common/Button';
 import browserClient from '@/utils/supabaseClient';
+import KakaoIcon from '@/assets/icons/icon-kakao.svg';
+import Button from '@/components/common/Button';
 
 export default function KakaoLogin() {
   const handleKakaoLogin = async () => {
@@ -10,5 +11,7 @@ export default function KakaoLogin() {
       },
     });
   };
-  return <Button onClick={handleKakaoLogin} title={'카카오톡 로그인'} />;
+  return (
+    <Button onClick={handleKakaoLogin} color={'transparent'} icon={KakaoIcon} />
+  );
 }

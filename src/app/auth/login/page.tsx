@@ -18,8 +18,10 @@ export default function Page() {
         <Link href={'/auth/find'}>비밀번호찾기</Link>
       </div>
       <Button size={'md'} title={'로그인'} onClick={handleRegister} />
-      <GoogleLogin />
-      <KakaoLogin />
+      <div className="btn_group flex-center">
+        <GoogleLogin />
+        <KakaoLogin />
+      </div>
     </>
   );
 }
