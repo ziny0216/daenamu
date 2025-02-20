@@ -30,7 +30,7 @@ export default function Page() {
       {joinStep === 'last' && (
         <>
           <UserRegisterForm />
-          <div className="btn_group full">
+          <div className="btn_group">
             <Button
               size={'md'}
               title={'이전'}

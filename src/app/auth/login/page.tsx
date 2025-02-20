@@ -4,6 +4,8 @@ import UserLoginForm from '@/components/module/User/UserLoginForm';
 
 import Button from '@/components/common/Button';
 import Link from 'next/link';
+import GoogleLogin from '@/components/module/Auth/GoogleLogin';
+import KakaoLogin from '@/components/module/Auth/KakaoLogin';
 
 export default function Page() {
   const handleRegister = () => {};
@@ -16,6 +18,8 @@ export default function Page() {
         <Link href={'/auth/find'}>비밀번호찾기</Link>
       </div>
       <Button size={'md'} title={'로그인'} onClick={handleRegister} />
+      <GoogleLogin />
+      <KakaoLogin />
     </>
   );
 }
