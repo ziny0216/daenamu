@@ -5,6 +5,7 @@ import { FileData } from '@/types/components/common';
 import EditIcon from '@/assets/icons/icon-edit.svg';
 import styles from '@/components/module/User/User.module.css';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function UserProfileImage() {
   const [editFile, setEditFile] = useState<FileData | null>(null);
@@ -14,7 +15,9 @@ export default function UserProfileImage() {
   return (
     <div className={styles.profile_edit}>
       <div className={styles.img_box}>
-        <img
+        <Image
+          fill
+          objectFit={'cover'}
           src={
             typeof editFile?.new_filepath === 'string'
               ? editFile.new_filepath
