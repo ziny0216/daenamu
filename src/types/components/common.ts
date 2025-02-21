@@ -1,4 +1,5 @@
 import {
+  ButtonHTMLAttributes,
   ElementType,
   InputHTMLAttributes,
   ReactNode,
@@ -11,6 +12,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   color?: 'default' | 'bottomBorder';
   inputSize?: 'sm' | 'md';
   isButton?: boolean;
+  children?: ReactNode;
 }
 
 export interface TextareaProps
@@ -18,13 +20,12 @@ export interface TextareaProps
   inputSize?: 'sm' | 'md';
 }
 
-export interface ButtonProps {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   title?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg';
   borderradius?: 'lg' | 'md';
   color?: 'default' | 'transparent' | 'foreground';
-  disabled?: boolean;
   onClick?: () => void;
   isIcon?: boolean;
   icon?: ElementType;
@@ -50,4 +51,8 @@ export interface FileDelete {
 export interface DefaultObj {
   name: string;
   value: string;
+}
+
+export interface FormErrors {
+  [key: string]: string | undefined;
 }

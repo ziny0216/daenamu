@@ -2,17 +2,22 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Tables } from '@/types/database.types';
 
 export interface UserState {
-  token: string;
   users: Tables<'users'>;
+  form: Partial<Tables<'users'>>;
 }
 
 const initialState: UserState = {
-  token: '',
   users: {
     avatar_url: '',
     created_at: '',
     email: '',
     id: '',
+    introduce: '',
+    nickname: '',
+  },
+  form: {
+    avatar_url: '',
+    email: '',
     introduce: '',
     nickname: '',
   },
@@ -22,15 +27,20 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserToken: (state, action: PayloadAction<Pick<UserState, 'token'>>) => {
-      state.token = action.payload.token;
-    },
-    setUser: (state, action: PayloadAction<Pick<UserState, 'users'>>) => {
+    setUser: (state, action: PayloadAction<UserState>) => {
       state.users = action.payload.users;
     },
+    setUserForm: (state, action: PayloadAction<Partial<Tables<'users'>>>) => {
+      state.form = { ...state.form, ...action.payload };
+    },
 
-    clearUser: () => initialState,
+    clearUser: state => {
+      state.users = initialState.users;
+    },
+    clearForm: state => {
+      state.form = initialState.form;
+    },
   },
 });
-export const { setUser, setUserToken, clearUser } = userSlice.actions;
+export const { setUser, setUserForm, clearUser, clearForm } = userSlice.actions;
 export default userSlice.reducer;

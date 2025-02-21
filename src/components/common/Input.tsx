@@ -54,12 +54,14 @@ export default function Input({
   label,
   id,
   type = 'text',
+  children,
   ...props
 }: InputProps) {
   return (
     <StyledInputWrapper>
       {label && <label htmlFor={id}>{label}</label>}
       <StyledInput id={id} type={type} {...props} />
+      {children}
     </StyledInputWrapper>
   );
 }

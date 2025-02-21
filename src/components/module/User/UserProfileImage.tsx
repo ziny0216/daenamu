@@ -4,24 +4,26 @@ import FileInput from '@/components/common/FileInput';
 import { FileData } from '@/types/components/common';
 import EditIcon from '@/assets/icons/icon-edit.svg';
 import styles from '@/components/module/User/User.module.css';
-import { useState } from 'react';
+import { ChangeEvent } from 'react';
 import Image from 'next/image';
+import { useForm } from '@/hooks/common/useForm';
 
 export default function UserProfileImage() {
-  const [editFile, setEditFile] = useState<FileData | null>(null);
+  const { onChange, form } = useForm();
   const handleFileChange = (files: FileData[]) => {
-    setEditFile(files[0]);
+    console.log(files);
+    onChange({
+      target: { value: files[0].new_filepath, name: 'avatar_url' },
+    } as ChangeEvent<HTMLInputElement>);
   };
   return (
     <div className={styles.profile_edit}>
       <div className={styles.img_box}>
         <Image
           fill
-          objectFit={'cover'}
+          style={{ objectFit: 'cover', borderRadius: '50em' }}
           src={
-            typeof editFile?.new_filepath === 'string'
-              ? editFile.new_filepath
-              : 'https://picsum.photos/32/32'
+            form?.avatar_url ? form?.avatar_url : 'https://picsum.photos/32/32'
           }
           alt="유저 이미지"
         />
