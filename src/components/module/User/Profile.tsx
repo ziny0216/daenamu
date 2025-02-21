@@ -1,8 +1,9 @@
 'use client';
 
 import styled from 'styled-components';
-import { useRouter } from 'next/navigation';
 import { ProfileProps } from '@/types/components/module';
+import useProfileInfo from '@/hooks/user/useProfileInfo';
+import Image from 'next/image';
 
 const profileSizes = {
   md: {
@@ -36,39 +37,38 @@ const StyledProfile = styled.div.withConfig({
 `;
 
 const StyledImageBox = styled.div<{ size: 'md' | 'lg' }>`
+  position: relative;
+  border-radius: 50em;
+  overflow: hidden;
   ${({ size = 'md' }) => profileSizes[size]}
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50em;
-    overflow: hidden;
-  }
 `;
 export default function Profile({
-  user,
+  user_id,
   size = 'md',
   className,
+  is_anonymity = false,
 }: ProfileProps) {
-  const router = useRouter();
-  const handleProfileClick = () => {
-    //  익명이 아닐때 해당 글쓴이 피드로
-    console.log(user.is_anonymity, 'user.is_anonymity');
-    if (!user.is_anonymity) {
-      router.push('/feed/1');
-    }
-  };
+  const { profile } = useProfileInfo({ user_id });
+
   return (
     <StyledProfile
       className={className}
       size={size}
-      onClick={handleProfileClick}
-      is_anonymity={user.is_anonymity}
+      is_anonymity={is_anonymity}
     >
       <StyledImageBox size={size}>
-        <img src={user.profile_img} alt="유저 프로필" />
+        <Image
+          src={
+            profile?.avatar_url
+              ? profile?.avatar_url
+              : 'https://picsum.photos/32/32'
+          }
+          alt="유저 프로필"
+          fill
+          objectFit={'cover'}
+        />
       </StyledImageBox>
-      <p className="nickname">{user.nickname}</p>
+      <p className="nickname">{profile?.nickname}</p>
     </StyledProfile>
   );
 }

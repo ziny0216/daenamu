@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
         hostname: 'picsum.photos',
         pathname: '/32/32',
       },
+      {
+        protocol: 'http',
+        hostname: 'k.kakaocdn.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
     ],
   },
 };
