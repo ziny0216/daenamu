@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 import Input from '@/components/common/Input';
 import SearchIcon from '@/assets/icons/icon-search.svg';
+import { useRouter } from 'next/navigation';
 
 const SearchBarWrapper = styled.div`
   display: flex;
@@ -22,15 +23,15 @@ const StyledButton = styled.button`
   transform: translateY(-50%);
 `;
 
-export default function SearchBar({
-  onButtonClick,
-}: {
-  onButtonClick: () => void;
-}) {
+export default function SearchBar() {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/search?keyword=${'ddd'}`);
+  };
   return (
     <SearchBarWrapper>
       <StyledInput color={'bottomBorder'} placeholder={'검색어 입력'} />
-      <StyledButton onClick={onButtonClick}>
+      <StyledButton onClick={handleClick}>
         <SearchIcon width="16" height="16" />
       </StyledButton>
     </SearchBarWrapper>
