@@ -1,17 +1,17 @@
+'use client';
+
 import styles from '@/components/layout/Layout.module.css';
 import Link from 'next/link';
 import Profile from '@/components/module/User/Profile';
 import SearchBar from '@/components/common/SearchBar';
-import { createClient } from '@/utils/supabaseServer';
+import useProfileInfo from '@/hooks/user/useProfileInfo';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
 
-export async function Header() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  console.log(user);
-
+export function Header() {
+  const { profile } = useProfileInfo();
+  const user = useSelector((state: RootState) => state.user.users);
+  console.log(user.nickname, 'user');
   return (
     <header className={styles.default_header}>
       <div className={styles.header_inner}>
@@ -20,7 +20,11 @@ export async function Header() {
         </Link>
         <div className={styles.right_content}>
           <SearchBar />
-          <Profile user_id={user?.id} />
+          {profile ? (
+            <Profile profile={profile} />
+          ) : (
+            <Link href={'/auth/login'}>로그인</Link>
+          )}
         </div>
       </div>
     </header>

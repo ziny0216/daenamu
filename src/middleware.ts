@@ -3,10 +3,8 @@ import { updateSession } from '@/utils/supabaseMiddleware';
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === '/') {
-    console.log('Redirecting to /home'); // ✅ 이 로그는 찍힐 가능성이 높음
     return NextResponse.redirect(new URL('/home', request.url));
   }
-  console.log('updateSession 실행 전'); // ❌ 이 로그는 찍히지 않을 가능성이 높음
   return await updateSession(request);
 }
 

@@ -4,9 +4,9 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 const userPersistConfig = {
-  key: 'users', // ✅ 특정 키 지정
+  key: 'users',
   storage,
-  whitelist: ['users'], // ✅ users만 저장
+  whitelist: ['users'],
 };
 
 export interface UserState {

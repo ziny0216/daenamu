@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import { ProfileProps } from '@/types/components/module';
-import useProfileInfo from '@/hooks/user/useProfileInfo';
 import Image from 'next/image';
 import DefaultPf from '@/assets/icons/default-pf.svg';
 
@@ -44,13 +43,11 @@ const StyledImageBox = styled.div<{ size: 'md' | 'lg' }>`
   ${({ size = 'md' }) => profileSizes[size]}
 `;
 export default function Profile({
-  user_id,
   size = 'md',
   className,
   is_anonymity = false,
+  profile,
 }: ProfileProps) {
-  const { profile } = useProfileInfo({ user_id });
-
   return (
     <StyledProfile
       className={className}

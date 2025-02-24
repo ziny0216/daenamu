@@ -24,6 +24,7 @@ export default function Page() {
       if (error) {
         throw new Error(error.message);
       } else {
+        console.log('Login Success:', data);
         router.push('/');
       }
     } catch (e) {
