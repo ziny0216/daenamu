@@ -9,9 +9,11 @@ import KakaoLogin from '@/components/module/Auth/KakaoLogin';
 import { useForm } from '@/hooks/common/useForm';
 import browserClient from '@/utils/supabaseClient';
 import { FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const { form, onChange } = useForm();
+  const router = useRouter();
   const login = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -22,7 +24,7 @@ export default function Page() {
       if (error) {
         throw new Error(error.message);
       } else {
-        console.log('Login 성공:', data);
+        router.push('/');
       }
     } catch (e) {
       console.error('Error Login:', e);
