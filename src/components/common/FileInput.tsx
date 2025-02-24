@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { FileData, FileObjType, InputProps } from '@/types/components/common';
+import { FileObjType, InputProps } from '@/types/components/common';
 import { ChangeEvent, ElementType } from 'react';
 import { checkFileSize } from '@/utils/validation';
 
@@ -23,7 +23,7 @@ export default function FileInput({
 }: InputProps & {
   className?: string;
   icon?: ElementType;
-  handleFileChange: (file: FileData[]) => void;
+  handleFileChange: (file: File[]) => void;
 }) {
   // 파일리더를 이용하여 파일 정보 읽기
   const getFileData = (file: File): Promise<FileObjType> => {
@@ -46,19 +46,20 @@ export default function FileInput({
     // 파일 비동기 처리
     Promise.all(promises)
       .then(results => {
-        const filesDataUrls = results.map(result => result.dataUrl);
+        console.log(results);
+        // const filesDataUrls = results.map(result => result.dataUrl);
         const processedFiles = results.map(result => result.file);
-
+        //
         const filesArr = checkFileSize(processedFiles, 3);
-
-        // 파일 미리보기 정보 구성
-        const previewArr: FileData[] = filesArr.map(file => ({
-          new_filepath: filesDataUrls[processedFiles.indexOf(file)],
-          org_filename: file.name,
-        }));
-        e.target.value = '';
+        //
+        // // 파일 미리보기 정보 구성
+        // const previewArr: FileData[] = filesArr.map(file => ({
+        //   new_filepath: filesDataUrls[processedFiles.indexOf(file)],
+        //   org_filename: file.name,
+        // }));
+        // e.target.value = '';
         if (handleFileChange) {
-          handleFileChange(previewArr);
+          handleFileChange(filesArr);
         }
       })
       .catch(error => {

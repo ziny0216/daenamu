@@ -65,7 +65,7 @@ export default function Profile({
           }
           alt="유저 프로필"
           fill
-          objectFit={'cover'}
+          style={{ objectFit: 'cover', borderRadius: '50em' }}
         />
       </StyledImageBox>
       <p className="nickname">{profile?.nickname}</p>

@@ -8,7 +8,7 @@ export default function UserEditForm() {
   const handleForm = () => {};
   return (
     <div className={styles.form_group}>
-      <UserProfileImage />
+      <UserProfileImage isSignup={false} />
       <UserInfo isEdit />
       <div className="btn_group full">
         <Button size={'md'} title={'수정'} onClick={() => handleForm} />

@@ -7,7 +7,7 @@ export default function UserRegisterForm() {
   return (
     <>
       <div className={styles.form_group}>
-        <UserProfileImage />
+        <UserProfileImage isSignup />
         <UserInfo isEdit={false} />
       </div>
     </>

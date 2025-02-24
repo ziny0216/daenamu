@@ -28,7 +28,7 @@ export default function PostImageList({
             />
             <Image
               fill
-              objectFit={'cover'}
+              style={{ objectFit: 'cover' }}
               src={item.new_filepath as string}
               alt={item.org_filename}
             />

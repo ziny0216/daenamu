@@ -6,14 +6,13 @@ import styles from '@/components/module/Post/Post.module.css';
 import { ChangeEvent, useState } from 'react';
 import FileInput from '@/components/common/FileInput';
 import PictureIcon from '@/assets/icons/icon-white-picture.svg';
-import { FileData } from '@/types/components/common';
 
 export default function PostWriteActionBar({
   disabled,
   handleFileChange,
 }: {
   disabled: boolean;
-  handleFileChange: (file: FileData[]) => void;
+  handleFileChange: (file: File[]) => void;
 }) {
   const [isChecked, setIsChecked] = useState(false);
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
