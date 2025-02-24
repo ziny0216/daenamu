@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ProfileProps } from '@/types/components/module';
 import useProfileInfo from '@/hooks/user/useProfileInfo';
 import Image from 'next/image';
+import DefaultPf from '@/assets/icons/default-pf.svg';
 
 const profileSizes = {
   md: {
@@ -57,16 +58,17 @@ export default function Profile({
       is_anonymity={is_anonymity}
     >
       <StyledImageBox size={size}>
-        <Image
-          src={
-            profile?.avatar_url
-              ? profile?.avatar_url
-              : 'https://picsum.photos/32/32'
-          }
-          alt="유저 프로필"
-          fill
-          style={{ objectFit: 'cover', borderRadius: '50em' }}
-        />
+        {profile?.avatar_url ? (
+          <Image
+            fill
+            sizes="30"
+            style={{ objectFit: 'cover', borderRadius: '50em' }}
+            src={profile?.avatar_url}
+            alt="유저 이미지"
+          />
+        ) : (
+          <DefaultPf width={30} height={30} />
+        )}
       </StyledImageBox>
       <p className="nickname">{profile?.nickname}</p>
     </StyledProfile>

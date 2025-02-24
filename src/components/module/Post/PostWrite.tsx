@@ -21,9 +21,9 @@ export default function PostWrite() {
     setPreviewData(prev => [...prev, ...data]);
   };
 
-  const handleDelete = (file_seq: number | null, idx: number) => {
-    if (file_seq) {
-      setDeletedFiles(prev => [...prev, file_seq]);
+  const handleDelete = (idx: number) => {
+    if (idx) {
+      setDeletedFiles(prev => [...prev, idx]);
     }
 
     setPreviewData(prev => prev.filter((_, index) => index !== idx));
