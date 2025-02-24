@@ -5,11 +5,10 @@ import styles from '@/components/module/Post/Post.module.css';
 import Textarea from '@/components/common/TextArea';
 import PostImageList from '@/components/module/Post/PostImageList';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { FileData } from '@/types/components/common';
 
 export default function PostWrite() {
   const [postContent, setPostContent] = useState('');
-  const [previewData, setPreviewData] = useState<FileData[]>([]);
+  const [previewData, setPreviewData] = useState<File[]>([]);
   const [deletedFiles, setDeletedFiles] = useState<number[]>([]);
   const handlePostContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setPostContent(e.target.value);
@@ -18,7 +17,7 @@ export default function PostWrite() {
   useEffect(() => {
     console.log(deletedFiles);
   }, [deletedFiles]);
-  const handleFileChange = (data: FileData[]) => {
+  const handleFileChange = (data: File[]) => {
     setPreviewData(prev => [...prev, ...data]);
   };
 
