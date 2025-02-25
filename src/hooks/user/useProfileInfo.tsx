@@ -1,10 +1,12 @@
 import browserClient from '@/utils/supabaseClient';
 import { useCallback, useEffect, useState } from 'react';
 import { Tables } from '@/types/database.types';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/lib/features/user/userSlice';
 
 export default function useProfileInfo() {
   const supabase = browserClient;
-
+  const dispatch = useDispatch();
   const [profile, setProfile] = useState<Tables<'users'> | null>(null);
 
   useEffect(() => {
@@ -41,6 +43,7 @@ export default function useProfileInfo() {
         }
         if (data) {
           setProfile(data);
+          dispatch(setUser(data));
         }
       } catch (e) {
         console.error(e);

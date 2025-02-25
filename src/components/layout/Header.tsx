@@ -5,13 +5,10 @@ import Link from 'next/link';
 import Profile from '@/components/module/User/Profile';
 import SearchBar from '@/components/common/SearchBar';
 import useProfileInfo from '@/hooks/user/useProfileInfo';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/lib/store';
 
 export function Header() {
   const { profile } = useProfileInfo();
-  const user = useSelector((state: RootState) => state.user.users);
-  console.log(user.nickname, 'user');
+
   return (
     <header className={styles.default_header}>
       <div className={styles.header_inner}>

@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 const userPersistConfig = {
-  key: 'users',
+  key: 'user',
   storage,
   whitelist: ['users'],
 };
@@ -35,8 +35,8 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserState>) => {
-      state.users = action.payload.users;
+    setUser: (state, action: PayloadAction<Tables<'users'>>) => {
+      state.users = action.payload;
     },
     setUserForm: (state, action: PayloadAction<Partial<Tables<'users'>>>) => {
       state.form = { ...state.form, ...action.payload };
