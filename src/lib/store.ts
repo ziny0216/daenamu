@@ -6,7 +6,6 @@ const rootReducer = combineReducers({
   user: persistedUserReducer,
   counter: counterSlice.reducer,
 });
-
 export const makeStore = () => {
   return configureStore({
     reducer: rootReducer,

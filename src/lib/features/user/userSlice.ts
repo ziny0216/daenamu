@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Tables } from '@/types/database.types';
-import storage from 'redux-persist/lib/storage';
+
 import { persistReducer } from 'redux-persist';
+import storage from '@/lib/storage';
 
 const userPersistConfig = {
   key: 'user',
