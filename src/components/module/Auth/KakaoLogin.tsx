@@ -12,6 +12,10 @@ export default function KakaoLogin() {
     });
   };
   return (
-    <Button onClick={handleKakaoLogin} color={'transparent'} icon={KakaoIcon} />
+    <Button
+      onClick={handleKakaoLogin}
+      color={'transparent'}
+      icon={<KakaoIcon />}
+    />
   );
 }

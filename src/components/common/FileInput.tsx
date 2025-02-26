@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import { FileData, InputProps } from '@/types/components/common';
-import { ChangeEvent, ElementType } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import { checkFileSize } from '@/utils/validation';
 
 const StyledFileWrapper = styled.div`
@@ -19,10 +19,10 @@ export default function FileInput({
   id,
   handleFileChange,
   className,
-  icon: Icon,
+  icon,
 }: InputProps & {
   className?: string;
-  icon?: ElementType;
+  icon?: ReactNode;
   handleFileChange: (file: FileData[]) => void;
 }) {
   // 파일 선택
@@ -45,7 +45,7 @@ export default function FileInput({
 
   return (
     <StyledFileWrapper className={className}>
-      <label htmlFor={id}>{Icon && <Icon />}</label>
+      <label htmlFor={id}>{icon}</label>
       <StyledFileInput
         accept=".png,.jpg"
         type={type}

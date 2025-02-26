@@ -1,6 +1,5 @@
 import {
   ButtonHTMLAttributes,
-  ElementType,
   InputHTMLAttributes,
   ReactNode,
   TextareaHTMLAttributes,
@@ -28,8 +27,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: 'default' | 'transparent' | 'foreground';
   onClick?: () => void;
   isIcon?: boolean;
-  icon?: ElementType;
-  children?: ReactNode;
+  icon?: ReactNode;
 }
 
 export interface FileData {

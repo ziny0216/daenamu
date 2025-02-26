@@ -90,6 +90,35 @@ a {
     color: #D92D20;
 }
 
+.line_group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.line_group .line_item {
+
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-sm);
+    color: var(--foreground);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.line_group .line_item:after {
+    content: '|';
+    display: block;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-sm);
+    color: var(--foreground);
+}
+
+.line_group .line_item:last-child:after {
+    display: none;
+}
+
 .show-enter {
     transform: translateY(0);
     opacity: 0;
@@ -116,4 +145,14 @@ a {
     transform: translateY(-96px);
     opacity: 0;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-icon {
+    animation: rotate 1s linear infinite;
 }

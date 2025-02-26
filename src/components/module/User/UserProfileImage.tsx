@@ -43,7 +43,7 @@ export default function UserProfileImage({
         <FileInput
           id={'profile_img'}
           handleFileChange={isSignup ? handleSignupFile : handleEditFile}
-          icon={EditIcon}
+          icon={<EditIcon />}
           className={styles.profile_input}
         />
       </div>

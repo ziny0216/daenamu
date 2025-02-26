@@ -14,7 +14,7 @@ export default function LikeButton() {
     <>
       <Button
         onClick={toggleLike}
-        icon={isLike ? LikeOnIcon : LikeOffIcon}
+        icon={isLike ? <LikeOnIcon /> : <LikeOffIcon />}
         isIcon
         color={'transparent'}
       />

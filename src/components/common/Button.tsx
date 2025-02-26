@@ -87,10 +87,10 @@ const StyledButton = styled('button').withConfig({
   }
 `;
 
-export default function Button({ icon: Icon, ...btn }: ButtonProps) {
+export default function Button({ icon, ...btn }: ButtonProps) {
   return (
     <StyledButton {...btn}>
-      {Icon && <Icon />}
+      {icon}
       {btn.title && <span>{btn.title}</span>}
     </StyledButton>
   );

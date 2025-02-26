@@ -20,7 +20,7 @@ export default function PostImageList({
               className={styles.delete_btn}
               isIcon
               color={'transparent'}
-              icon={DeleteBtn}
+              icon={<DeleteBtn />}
               onClick={() => onDeleteImg && onDeleteImg(index)}
             />
             {/*<Image*/}

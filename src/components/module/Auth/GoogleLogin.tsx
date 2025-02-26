@@ -1,6 +1,6 @@
 import Button from '@/components/common/Button';
 import browserClient from '@/utils/supabaseClient';
-import googleIcon from '@/assets/icons/icon-google.svg';
+import GoogleIcon from '@/assets/icons/icon-google.svg';
 
 export default function GoogleLogin() {
   const handleGoogleLogin = async () => {
@@ -17,7 +17,7 @@ export default function GoogleLogin() {
       color={'foreground'}
       isIcon
       onClick={handleGoogleLogin}
-      icon={googleIcon}
+      icon={<GoogleIcon />}
     />
   );
 }

@@ -27,7 +27,7 @@ export default function PostWriteActionBar({
     <div className={styles.action_box}>
       <FileInput
         id={'postImg'}
-        icon={PictureIcon}
+        icon={<PictureIcon />}
         handleFileChange={handleFileChange}
       />
       <div className={styles.right_content}>

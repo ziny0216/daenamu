@@ -10,7 +10,7 @@ export default function PostActionBar() {
   return (
     <div className={styles.action_box}>
       <Button
-        icon={CommentIcon}
+        icon={<CommentIcon />}
         isIcon
         color={'transparent'}
         onClick={() => router.push('/post/1')}
