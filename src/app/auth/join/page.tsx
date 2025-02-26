@@ -7,6 +7,8 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useForm } from '@/hooks/common/useForm';
 import browserClient from '@/utils/supabaseClient';
 import { useRouter } from 'next/navigation';
+import LoadingButton from '@/components/common/LoadingButton';
+import { toast } from 'react-toastify';
 
 export default function Page() {
   const router = useRouter();
@@ -39,7 +41,6 @@ export default function Page() {
 
     return true;
   };
-  console.log(profileData, 'profileData');
   const handleUserRegister = async (e: FormEvent) => {
     e.preventDefault(); // 기본 form 제출 방지
 
@@ -64,11 +65,10 @@ export default function Page() {
     });
 
     if (error) {
-      console.error('회원가입 실패:', error.message);
+      toast(error.message);
     } else {
-      console.log('회원가입 성공:', user);
       router.push('/');
-      alert('이메일을 확인해주세요!');
+      toast('인증 이메일을 보냈습니다! 이메일을 확인해주세요.');
     }
   };
 
@@ -100,8 +100,8 @@ export default function Page() {
               title={'이전'}
               onClick={() => handleJoinStep('first')}
             />
-            <Button
-              disabled={!isValid}
+            <LoadingButton
+              disabled={!isValid || !profileData}
               size={'md'}
               title={'회원가입'}
               type="submit"

@@ -50,12 +50,17 @@ export const useForm = (type: 'first' | 'last') => {
   // 빈값 체크
   useEffect(() => {
     let isFormNowValid: boolean;
+
     if (type === 'first') {
       isFormNowValid = !!(form.email && password);
     } else {
-      isFormNowValid = !!(form.nickname && form.avatar_url && form.introduce);
+      isFormNowValid = !!(form.nickname && form.introduce);
     }
-    isFormNowValid = Object.keys(error).length <= 0;
+
+    if (isFormNowValid) {
+      isFormNowValid = Object.keys(error).length === 0;
+    }
+
     setIsValid(isFormNowValid);
   }, [form, error, password, type]);
 

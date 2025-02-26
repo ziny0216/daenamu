@@ -74,6 +74,10 @@
     gap: 16px;
 }
 
+.sign_container .sign_inner form + div {
+    margin-top: 8px;
+}
+
 .sign_container .sign_inner > div, .sign_container .sign_inner > button {
     flex: 1;
 }

@@ -1,37 +1,71 @@
 'use client';
 
 import UserLoginForm from '@/components/module/User/UserLoginForm';
-
-import Button from '@/components/common/Button';
 import Link from 'next/link';
 import GoogleLogin from '@/components/module/Auth/GoogleLogin';
 import KakaoLogin from '@/components/module/Auth/KakaoLogin';
 import { useForm } from '@/hooks/common/useForm';
 import browserClient from '@/utils/supabaseClient';
-import { FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { FormEvent, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { toast } from 'react-toastify';
+import LoadingButton from '@/components/common/LoadingButton';
 
 export default function Page() {
-  const { form, onChange, error } = useForm('first');
+  const { form, onChange, error, isValid } = useForm('first');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const errorCode = searchParams.get('error_code');
+  useEffect(() => {
+    if (errorCode === 'otp_expired') {
+      console.log(errorCode, 'errorCode');
+    }
+  }, [router]);
+  // 이메일 인증 만료된 사용자 재전송
+  const resendEmail = async () => {
+    try {
+      const { error } = await browserClient.auth.resend({
+        type: 'signup',
+        email: 'email@example.com',
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/login`,
+        },
+      });
+      if (error) {
+        toast(error.message);
+      } else {
+        toast('인증 이메일을 다시보냈습니다.');
+      }
+    } catch (e) {
+      console.error('Error Resend:', e);
+      toast('다시 시도 해주세요.');
+    }
+  };
+
+  // 로그인
   const login = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const { data, error } = await browserClient.auth.signInWithPassword({
+      const { error } = await browserClient.auth.signInWithPassword({
         email: form.email as string,
         password: form.password,
       });
       if (error) {
-        throw new Error(error.message);
+        if (error.code === 'invite_not_found') {
+          toast('이메일 인증이 만료되었습니다');
+          await resendEmail();
+        }
+        toast(error.message);
       } else {
-        console.log('Login Success:', data);
+        toast('로그인 성공');
         router.push('/');
       }
     } catch (e) {
       console.error('Error Login:', e);
-      throw e;
+      toast('다시 시도 해주세요.');
     }
   };
+
   return (
     <>
       <form onSubmit={login}>
@@ -42,11 +76,21 @@ export default function Page() {
           onChangeInput={onChange}
           error={error}
         />
-        <div className="btn_group flex-center">
-          <Link href={'/auth/join'}>회원가입</Link> |{' '}
-          <Link href={'/auth/find'}>비밀번호찾기</Link>
+        <div className="line_group">
+          <Link className="line_item" href={'/auth/join'}>
+            회원가입
+          </Link>
+          <Link className="line_item" href={'/auth/find'}>
+            비밀번호찾기
+          </Link>
         </div>
-        <Button size={'md'} title={'로그인'} type="submit" />
+
+        <LoadingButton
+          disabled={!isValid}
+          size={'md'}
+          title={'로그인'}
+          type="submit"
+        />
       </form>
       <div className="btn_group flex-center">
         <GoogleLogin />
