@@ -3,40 +3,54 @@
 import UserRegisterForm from '@/components/module/User/UserRegisterForm';
 import UserLoginForm from '@/components/module/User/UserLoginForm';
 import Button from '@/components/common/Button';
-import { FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useForm } from '@/hooks/common/useForm';
 import browserClient from '@/utils/supabaseClient';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+  const router = useRouter();
   const [joinStep, setJoinStep] = useState<'first' | 'last'>('first');
-  const { form, onChange } = useForm();
-
+  const [profileData, setProfileData] = useState<File>();
+  const { form, onChange, error, isValid } = useForm(joinStep);
   const handleJoinStep = (step: 'first' | 'last') => {
-    console.log('폼 상태 확인:', form);
-
-    if (step === 'first' && (!form.email || !form.password)) {
-      console.log('이메일 또는 비밀번호가 비어 있음:', form);
-      return;
-    } else {
-      setJoinStep(step);
-    }
-
-    if (
-      step === 'last' &&
-      (!form.nickname || !form.avatar_url || !form.introduce)
-    ) {
-      console.log('닉네임, 프로필 사진 또는 소개가 비어 있음:', form);
-      return;
-    } else {
-      setJoinStep(step);
-    }
+    setJoinStep(step);
   };
 
+  const getAvatarUrl = async () => {
+    if (!profileData) return false;
+    const fileName = `${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+    const { data, error } = await browserClient.storage
+      .from('avatars')
+      .upload(fileName, profileData);
+
+    if (!data || error) {
+      console.error('Upload failed:', error);
+      return;
+    }
+
+    const {
+      data: { publicUrl },
+    } = browserClient.storage.from('avatars').getPublicUrl(data.path);
+
+    onChange({
+      target: { value: publicUrl, name: 'avatar_url' },
+    } as ChangeEvent<HTMLInputElement>);
+
+    return true;
+  };
+  console.log(profileData, 'profileData');
   const handleUserRegister = async (e: FormEvent) => {
     e.preventDefault(); // 기본 form 제출 방지
 
-    console.log(form, 'form');
-    const { data, error } = await browserClient.auth.signUp({
+    const avatar_url = getAvatarUrl();
+
+    if (!avatar_url) alert('잠시 후 다시 시도 해주세요');
+
+    const {
+      data: { user },
+      error,
+    } = await browserClient.auth.signUp({
       email: form.email as string,
       password: form.password,
       options: {
@@ -45,23 +59,32 @@ export default function Page() {
           introduce: form.introduce,
           avatar_url: form.avatar_url,
         },
-        emailRedirectTo: `http://localhost:3000/auth/login`,
+        emailRedirectTo: `${window.location.origin}/auth/login`,
       },
     });
 
     if (error) {
       console.error('회원가입 실패:', error.message);
     } else {
-      console.log('회원가입 성공:', data);
+      console.log('회원가입 성공:', user);
+      router.push('/');
+      alert('이메일을 확인해주세요!');
     }
   };
+
   return (
     <form onSubmit={handleUserRegister}>
       <h1>회원가입</h1>
       {joinStep === 'first' && (
         <>
-          <UserLoginForm password={form.password} handlePassword={onChange} />
+          <UserLoginForm
+            email={form.email || ''}
+            error={error}
+            password={form.password}
+            onChangeInput={onChange}
+          />
           <Button
+            disabled={!isValid}
             size={'md'}
             title={'다음'}
             onClick={() => handleJoinStep('last')}
@@ -70,14 +93,19 @@ export default function Page() {
       )}
       {joinStep === 'last' && (
         <>
-          <UserRegisterForm />
+          <UserRegisterForm setProfileData={setProfileData} />
           <div className="btn_group full">
             <Button
               size={'md'}
               title={'이전'}
               onClick={() => handleJoinStep('first')}
             />
-            <Button size={'md'} title={'회원가입 '} type="submit" />
+            <Button
+              disabled={!isValid}
+              size={'md'}
+              title={'회원가입'}
+              type="submit"
+            />
           </div>
         </>
       )}

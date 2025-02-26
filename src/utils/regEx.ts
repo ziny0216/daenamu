@@ -7,14 +7,15 @@ export const validateInput = (input: string, isChar = false) => {
   const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
   const hasSpecialCharacter = regExp.test(input);
   const hasNumber = /\d/.test(input);
-  const hasLetter = /[A-Za-z]/.test(input);
+  const hasLowerCase = /[a-z]/.test(input);
+  const hasUpperCase = /[A-Z]/.test(input);
   if (isChar) {
     // 특수문자, 숫자, 영문자 중 하나라도 없으면 false 반환
-    if (!hasSpecialCharacter || !hasNumber || !hasLetter) {
+    if (!hasSpecialCharacter || !hasNumber || !hasLowerCase || !hasUpperCase) {
       return false;
     }
   } else {
-    if (hasSpecialCharacter || !hasNumber || !hasLetter) {
+    if (hasSpecialCharacter || !hasNumber || !hasLowerCase || !hasUpperCase) {
       return false;
     }
   }

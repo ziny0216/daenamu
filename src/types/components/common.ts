@@ -32,15 +32,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
 }
 
-export interface FileObjType {
-  dataUrl: string | ArrayBuffer | null;
-  file: File;
-}
-
 export interface FileData {
-  new_filepath: string | ArrayBuffer | null;
-  org_filename: string;
-  file_seq?: number;
+  filepath: string;
+  file: File;
 }
 
 export interface FileDelete {

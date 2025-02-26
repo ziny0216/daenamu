@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { setUserForm } from '@/lib/features/user/userSlice';
 import { FormErrors } from '@/types/components/common';
-import { emailRegex } from '@/utils/regEx';
+import { emailRegex, validateInput } from '@/utils/regEx';
 
-export const useForm = () => {
+export const useForm = (type: 'first' | 'last') => {
   const dispatch = useDispatch();
   const form = useSelector((state: RootState) => state.user.form);
   const [password, setPassword] = useState('');
@@ -18,6 +18,11 @@ export const useForm = () => {
     // 이메일 유효성 검사
     if (name === 'email' && !emailRegex(value)) {
       errorMsg = '이메일을 확인해주세요';
+    }
+
+    // 비밀번호 유효성 검사
+    if (name === 'password' && !validateInput(value, true)) {
+      errorMsg = '특수문자, 숫자, 영문자 조합으로 입력해주세요.';
     }
 
     setError(prevErrors => {
@@ -44,13 +49,15 @@ export const useForm = () => {
 
   // 빈값 체크
   useEffect(() => {
-    const isFormNowValid =
-      Object.entries(form).every(([key, value]) => {
-        if (key === 'nickname') return true;
-        return value !== '';
-      }) && Object.keys(error).length === 0;
+    let isFormNowValid: boolean;
+    if (type === 'first') {
+      isFormNowValid = !!(form.email && password);
+    } else {
+      isFormNowValid = !!(form.nickname && form.avatar_url && form.introduce);
+    }
+    isFormNowValid = Object.keys(error).length <= 0;
     setIsValid(isFormNowValid);
-  }, [error, form]);
+  }, [form, error, password, type]);
 
   return {
     onChange,

@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
         hostname: 'picsum.photos',
         pathname: '/32/32',
       },
+
       {
         protocol: 'http',
         hostname: 'k.kakaocdn.net',
@@ -29,6 +30,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'mkkzapkdmyligxuyrczy.supabase.co',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost:3000',
       },
     ],
   },
