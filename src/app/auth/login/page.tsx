@@ -12,7 +12,7 @@ import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const { form, onChange } = useForm();
+  const { form, onChange, error } = useForm('first');
   const router = useRouter();
   const login = async (e: FormEvent) => {
     e.preventDefault();
@@ -36,7 +36,12 @@ export default function Page() {
     <>
       <form onSubmit={login}>
         <h1>로그인</h1>
-        <UserLoginForm password={form.password} handlePassword={onChange} />
+        <UserLoginForm
+          email={form.email || ''}
+          password={form.password}
+          onChangeInput={onChange}
+          error={error}
+        />
         <div className="btn_group flex-center">
           <Link href={'/auth/join'}>회원가입</Link> |{' '}
           <Link href={'/auth/find'}>비밀번호찾기</Link>
