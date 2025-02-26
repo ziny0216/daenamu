@@ -5,10 +5,11 @@ import styles from '@/components/module/Post/Post.module.css';
 import Textarea from '@/components/common/TextArea';
 import PostImageList from '@/components/module/Post/PostImageList';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { FileData } from '@/types/components/common';
 
 export default function PostWrite() {
   const [postContent, setPostContent] = useState('');
-  const [previewData, setPreviewData] = useState<File[]>([]);
+  const [previewData, setPreviewData] = useState<FileData[]>([]);
   const [deletedFiles, setDeletedFiles] = useState<number[]>([]);
   const handlePostContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setPostContent(e.target.value);
@@ -17,7 +18,7 @@ export default function PostWrite() {
   useEffect(() => {
     console.log(deletedFiles);
   }, [deletedFiles]);
-  const handleFileChange = (data: File[]) => {
+  const setProfileData = (data: FileData[]) => {
     setPreviewData(prev => [...prev, ...data]);
   };
 
@@ -38,10 +39,7 @@ export default function PostWrite() {
         placeholder="지금 내 생각은...?"
       />
       <PostImageList onDeleteImg={handleDelete} files={previewData} />
-      <PostActionBar
-        disabled={!postContent}
-        handleFileChange={handleFileChange}
-      />
+      <PostActionBar disabled={!postContent} setProfileData={setProfileData} />
     </div>
   );
 }

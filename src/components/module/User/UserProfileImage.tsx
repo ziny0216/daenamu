@@ -16,7 +16,7 @@ export default function UserProfileImage({
   setProfileData: (file: File) => void;
 }) {
   const [preview, setPreview] = useState('');
-  const handleSignupFile = async (files: FileData[]) => {
+  const handleSignupFile = (files: FileData[]) => {
     if (!files) return;
     setProfileData(files[0].file);
     setPreview(files[0].filepath);

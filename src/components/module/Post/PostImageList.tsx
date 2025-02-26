@@ -2,19 +2,20 @@
 import styles from '@/components/module/Post/Post.module.css';
 import Button from '@/components/common/Button';
 import DeleteBtn from '@/assets/icons/icon-circle.svg';
+import { FileData } from '@/types/components/common';
 
 export default function PostImageList({
   files = [],
   onDeleteImg,
 }: {
-  files?: File[];
+  files?: FileData[];
   onDeleteImg?: (idx: number) => void;
 }) {
   return (
     <>
       <ul className={styles.img_list}>
         {files.map((item, index) => (
-          <li className={styles.img_box} key={item.name || index}>
+          <li className={styles.img_box} key={index}>
             <Button
               className={styles.delete_btn}
               isIcon
