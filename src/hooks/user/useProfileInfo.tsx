@@ -49,7 +49,7 @@ export default function useProfileInfo() {
         console.error(e);
       }
     },
-    [supabase],
+    [dispatch, supabase],
   );
 
   return { profile };

@@ -20,7 +20,7 @@ export default function Page() {
     if (errorCode === 'otp_expired') {
       console.log(errorCode, 'errorCode');
     }
-  }, [router]);
+  }, [router, errorCode]);
   // 이메일 인증 만료된 사용자 재전송
   const resendEmail = async () => {
     try {

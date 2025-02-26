@@ -48,10 +48,7 @@ export default function Page() {
 
     if (!avatar_url) alert('잠시 후 다시 시도 해주세요');
 
-    const {
-      data: { user },
-      error,
-    } = await browserClient.auth.signUp({
+    const { error } = await browserClient.auth.signUp({
       email: form.email as string,
       password: form.password,
       options: {
