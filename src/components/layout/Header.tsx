@@ -20,7 +20,14 @@ export function Header() {
           {profile ? (
             <Profile profile={profile} />
           ) : (
-            <Link href={'/auth/login'}>로그인</Link>
+            <div className="line_group">
+              <Link className="line_item" href={'/auth/login'}>
+                로그인
+              </Link>
+              <Link className="line_item" href={'/auth/join'}>
+                회원가입
+              </Link>
+            </div>
           )}
         </div>
       </div>

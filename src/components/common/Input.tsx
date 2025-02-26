@@ -55,12 +55,13 @@ export default function Input({
   id,
   type = 'text',
   children,
+
   ...props
 }: InputProps) {
   return (
     <StyledInputWrapper>
       {label && <label htmlFor={id}>{label}</label>}
-      <StyledInput id={id} type={type} {...props} />
+      <StyledInput id={id} type={type} {...props} autoComplete="off" />
       {children}
     </StyledInputWrapper>
   );

@@ -1,7 +1,8 @@
 import '@/styles/main.css';
-import StoreProvider from '@/components/StoreProvider';
-import StyledComponentsRegistry from '@/components/StyledComponentsRegistry';
+import StoreProvider from '@/components/provider/StoreProvider';
+import StyledComponentsRegistry from '@/components/provider/StyledComponentsRegistry';
 import { Header } from '@/components/layout/Header';
+import { ToastProvider } from '@/components/provider/ToastProvider';
 
 export default function RootLayout({
   children,
@@ -19,6 +20,7 @@ export default function RootLayout({
             </div>
           </StoreProvider>
         </StyledComponentsRegistry>
+        <ToastProvider />
       </body>
     </html>
   );
