@@ -9,7 +9,7 @@ import { useForm } from '@/hooks/common/useForm';
 
 export default function UserInfo({ isEdit = false }: { isEdit: boolean }) {
   const [isChangePw, setIsChangePw] = useState(false);
-  const { onChange, form } = useForm();
+  const { onChange, form } = useForm('first');
   const handleChangePw = () => {
     setIsChangePw(!isChangePw);
   };

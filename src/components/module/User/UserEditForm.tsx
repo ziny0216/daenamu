@@ -6,9 +6,10 @@ import Button from '@/components/common/Button';
 
 export default function UserEditForm() {
   const handleForm = () => {};
+  const setProfileData = () => {};
   return (
     <div className={styles.form_group}>
-      <UserProfileImage isSignup={false} />
+      <UserProfileImage isSignup={false} setProfileData={setProfileData} />
       <UserInfo isEdit />
       <div className="btn_group full">
         <Button size={'md'} title={'수정'} onClick={() => handleForm} />
