@@ -44,7 +44,7 @@ export default function Page() {
   const handleUserRegister = async (e: FormEvent) => {
     e.preventDefault(); // 기본 form 제출 방지
 
-    const avatar_url = getAvatarUrl();
+    const avatar_url = await getAvatarUrl();
 
     if (!avatar_url) alert('잠시 후 다시 시도 해주세요');
 

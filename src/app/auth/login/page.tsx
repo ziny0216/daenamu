@@ -80,8 +80,8 @@ export default function Page() {
           <Link className="line_item" href={'/auth/join'}>
             회원가입
           </Link>
-          <Link className="line_item" href={'/auth/find'}>
-            비밀번호찾기
+          <Link className="line_item" href={'/auth/reset'}>
+            비밀번호를 잊어버리셨나요?
           </Link>
         </div>
 
