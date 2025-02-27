@@ -5,7 +5,7 @@ import { setUserForm } from '@/lib/features/user/userSlice';
 import { FormErrors } from '@/types/components/common';
 import { emailRegex, validateInput } from '@/utils/regEx';
 
-export const useForm = (type: 'first' | 'last' | 'pw') => {
+export const useForm = (type: 'first' | 'last' | 'request' | 'recovery') => {
   const dispatch = useDispatch();
   const form = useSelector((state: RootState) => state.user.form);
   const [password, setPassword] = useState('');
@@ -58,8 +58,11 @@ export const useForm = (type: 'first' | 'last' | 'pw') => {
       case 'last':
         isFormNowValid = !!(form.nickname && form.introduce);
         break;
-      case 'pw':
+      case 'request':
         isFormNowValid = !!form.email;
+        break;
+      case 'recovery':
+        isFormNowValid = !!password;
         break;
     }
 
