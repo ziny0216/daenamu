@@ -8,14 +8,17 @@ import { useForm } from '@/hooks/common/useForm';
 import browserClient from '@/utils/supabaseClient';
 import UserLoginForm from '@/components/module/User/UserLoginForm';
 import { toast } from 'react-toastify';
-import { clearUser } from '@/lib/features/user/userSlice';
+import { clearUser, setIsRecovery } from '@/lib/features/user/userSlice';
 import { useDispatch } from 'react-redux';
+import usePreventNavigation from '@/hooks/user/usePasswordNavigation';
 
 export default function Page() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const type = searchParams.get('type');
+  const errorCode = searchParams.get('error_code');
+  usePreventNavigation('recovery');
   const [resetStep, setResetStep] = useState<'request' | 'recovery'>('request');
   const { form, onChange, error, isValid } = useForm(resetStep);
 
@@ -36,9 +39,8 @@ export default function Page() {
             )
           : await browserClient.auth.updateUser({ password: form.password });
 
-      const { data, error } = request;
+      const { error } = request;
 
-      console.log(data, 'data');
       if (error) {
         console.error('비밀번호 재설정 오류:', error);
         toast(error.message || '비밀번호 재설정 중 문제가 발생했습니다.');
@@ -49,10 +51,12 @@ export default function Page() {
         toast('재설정 이메일을 보냈습니다! 이메일을 확인해주세요.');
       } else if (resetStep === 'recovery') {
         await browserClient.auth.signOut();
-        toast('비밀번호 재설정 성공!');
         dispatch(clearUser());
-        router.push('/auth/login');
+        dispatch(setIsRecovery(false));
+        toast('비밀번호 재설정 성공!');
       }
+
+      router.push('/auth/login');
     } catch (err) {
       console.error('비밀번호 재설정 오류:', err);
       toast('다시 시도해주세요.');
@@ -60,10 +64,19 @@ export default function Page() {
   };
 
   useEffect(() => {
-    if (type === 'recovery') {
-      setResetStep('recovery');
+    if (type === 'recovery' && !errorCode) {
+      setResetStep(type);
+      dispatch(setIsRecovery(true));
+    } else {
+      setResetStep('request');
+      dispatch(setIsRecovery(false));
     }
-  }, [type]);
+
+    if (errorCode === 'otp_expired') {
+      toast('이메일 인증이 만료되었습니다.');
+      router.replace('/auth/reset');
+    }
+  }, [errorCode, type]);
 
   return (
     <>
@@ -78,7 +91,10 @@ export default function Page() {
           error={error}
         />
         <div className="btn_group full">
-          <Button size={'md'} title={'이전'} onClick={() => router.back()} />
+          {type === 'recovery' && (
+            <Button size={'md'} title={'이전'} onClick={() => router.back()} />
+          )}
+
           <LoadingButton
             disabled={!isValid}
             size={'md'}

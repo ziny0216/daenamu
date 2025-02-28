@@ -36,6 +36,10 @@ const btnColor = {
   transparent: {
     backgroundColor: 'transparent',
   },
+  decoration: {
+    backgroundColor: 'transparent',
+    textDecoration: 'underline',
+  },
   foreground: {
     backgroundColor: 'var(--foreground)',
     hover: {
@@ -83,7 +87,9 @@ const StyledButton = styled('button').withConfig({
 
   &:hover {
     ${({ color = 'default' }) =>
-      color === 'transparent' ? null : btnColor[color]?.hover};
+      color === 'transparent' || color === 'decoration'
+        ? null
+        : btnColor[color]?.hover};
   }
 `;
 

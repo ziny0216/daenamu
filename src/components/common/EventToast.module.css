@@ -1,0 +1,11 @@
+.event_toast {
+    width: 100%;
+}
+
+.event_toast .event_toast_txt {
+    padding-right: 4px;
+}
+
+.event_toast .event_toast_btn {
+    padding: 0;
+}
