@@ -26,7 +26,7 @@ const StyledProfile = styled.div.withConfig({
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: ${props => (props.is_anonymity ? 'pointer' : 'default')};
+  cursor: ${props => (props.is_anonymity ? 'default' : 'pointer')};
   padding: 8px 0;
 
   .nickname {
@@ -47,9 +47,11 @@ export default function Profile({
   className,
   is_anonymity = false,
   profile,
+  handleUserProfile,
 }: ProfileProps) {
   return (
     <StyledProfile
+      onClick={handleUserProfile}
       className={className}
       size={size}
       is_anonymity={is_anonymity}

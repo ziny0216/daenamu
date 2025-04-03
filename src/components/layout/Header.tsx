@@ -7,11 +7,16 @@ import SearchBar from '@/components/common/SearchBar';
 import useProfileInfo from '@/hooks/user/useProfileInfo';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
+import { useRouter } from 'next/navigation';
 
 export function Header() {
+  const router = useRouter();
   const { profile } = useProfileInfo();
-  const isRecovery = useSelector((state: RootState) => state.user.isRecovery);
 
+  const isRecovery = useSelector((state: RootState) => state.user.isRecovery);
+  const handleUserProfile = () => {
+    router.push('/my/activity');
+  };
   return (
     <header className={styles.default_header}>
       <div className={styles.header_inner}>
@@ -22,7 +27,11 @@ export function Header() {
           <div className={styles.right_content}>
             <SearchBar />
             {profile ? (
-              <Profile profile={profile} />
+              <Profile
+                is_anonymity={false}
+                profile={profile}
+                handleUserProfile={handleUserProfile}
+              />
             ) : (
               <div className="line_group">
                 <Link className="line_item" href={'/auth/login'}>
