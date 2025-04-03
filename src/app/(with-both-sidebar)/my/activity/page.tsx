@@ -1,7 +1,5 @@
 'use client';
 
-import CommentItem from '@/components/module/Comment/CommentItem';
-import PostItem from '@/components/module/Post/PostItem';
 import React, { useState } from 'react';
 import TabList from '@/components/common/TabList';
 import { DefaultObj } from '@/types/components/common';
@@ -19,7 +17,7 @@ export default function Page() {
   return (
     <div className="inner flex-col">
       <TabList tabList={tabMok} onChange={handTabChange} />
-      <div>{tab === 'post' ? <PostItem type={'list'} /> : <CommentItem />}</div>
+      {/*<div>{tab === 'post' ? <PostItem type={'list'} /> : <CommentItem />}</div>*/}
     </div>
   );
 }

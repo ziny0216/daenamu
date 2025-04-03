@@ -13,7 +13,7 @@ export default function PostImageList({
 }: {
   files?: FileData[] | Tables<'post_images'>[];
   onDeleteImg?: (idx: number) => void;
-  listType: 'list' | 'add';
+  listType?: 'list' | 'add';
 }) {
   return (
     <>
