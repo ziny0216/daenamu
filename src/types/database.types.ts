@@ -50,7 +50,7 @@ export type Database = {
         Insert: {
           content: string
           created_at?: string
-          id: string
+          id?: string
           is_anonymity: boolean
           nickname?: string | null
           user_id?: string

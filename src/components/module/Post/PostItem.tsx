@@ -8,7 +8,7 @@ export default function PostItem({
   type,
   post,
 }: {
-  type: 'list' | 'detaill';
+  type: 'list' | 'detail';
   post: PostWithImages;
 }) {
   return (
