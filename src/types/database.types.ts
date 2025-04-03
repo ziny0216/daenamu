@@ -9,6 +9,62 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      post_images: {
+        Row: {
+          created_at: string
+          id: number
+          image_url: string | null
+          post_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          image_url?: string | null
+          post_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          image_url?: string | null
+          post_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_images_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posts: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_anonymity: boolean
+          nickname: string | null
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id: string
+          is_anonymity: boolean
+          nickname?: string | null
+          user_id?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_anonymity?: boolean
+          nickname?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       users: {
         Row: {
           avatar_url: string | null

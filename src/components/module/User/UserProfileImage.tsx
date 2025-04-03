@@ -19,7 +19,7 @@ export default function UserProfileImage({
   const handleSignupFile = (files: FileData[]) => {
     if (!files) return;
     setProfileData(files[0].file);
-    setPreview(files[0].filepath);
+    setPreview(files[0].image_url);
   };
 
   const handleEditFile = () => {

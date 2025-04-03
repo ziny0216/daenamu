@@ -1,23 +1,28 @@
 'use client';
 
-import Button from '@/components/common/Button';
 import Checkbox from '@/components/common/Checkbox';
 import styles from '@/components/module/Post/Post.module.css';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import FileInput from '@/components/common/FileInput';
 import PictureIcon from '@/assets/icons/icon-white-picture.svg';
 import { FileData } from '@/types/components/common';
+import LoadingButton from '@/components/common/LoadingButton';
 
 export default function PostWriteActionBar({
   disabled,
   setProfileData,
+  handlePost,
+  isChecked,
+  onChange,
 }: {
   disabled: boolean;
   setProfileData: (file: FileData[]) => void;
+  handlePost: () => void;
+  isChecked: boolean;
+  onChange: (checked: boolean) => void;
 }) {
-  const [isChecked, setIsChecked] = useState(false);
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(e.target.checked);
+  const handleIsAnonymity = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.checked);
   };
 
   const handleFileChange = (files: FileData[]) => {
@@ -35,9 +40,14 @@ export default function PostWriteActionBar({
           label={'익명'}
           id={'anonymity'}
           checked={isChecked}
-          onChange={onChange}
+          onChange={handleIsAnonymity}
         />
-        <Button disabled={disabled} size={'sm'} title={'POST'}></Button>
+        <LoadingButton
+          onClick={handlePost}
+          disabled={disabled}
+          size={'sm'}
+          title={'POST'}
+        ></LoadingButton>
       </div>
     </div>
   );

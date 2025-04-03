@@ -34,7 +34,7 @@ export default function FileInput({
     const filesArr = checkFileSize(processedFiles, 3);
     //파일 미리보기 정보 구성
     const previewArr: FileData[] = filesArr.map(file => ({
-      filepath: URL.createObjectURL(file),
+      image_url: URL.createObjectURL(file),
       file: file,
     }));
     e.target.value = '';

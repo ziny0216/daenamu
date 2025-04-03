@@ -31,7 +31,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export interface FileData {
-  filepath: string;
+  image_url: string;
   file: File;
 }
 
