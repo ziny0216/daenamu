@@ -29,8 +29,6 @@ export default function PostImageList({
                 onClick={() => onDeleteImg && onDeleteImg(index)}
               />
             )}
-
-            {item?.image_url}
             <Image
               sizes="50"
               fill

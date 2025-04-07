@@ -30,17 +30,17 @@ export const uploadPost = async ({
   content,
   files,
   user_id,
-  nickname,
   is_anonymity,
-}: Omit<Tables<'posts'>, 'created_at' | 'id'> & { files: FileData[] }) => {
-  const uploadedUrls = await uploadPostImages(files, user_id);
+}: Omit<Tables<'posts'>, 'created_at' | 'nickname' | 'id'> & {
+  files: FileData[];
+}) => {
+  const uploadedUrls = await uploadPostImages(files, user_id as string);
 
   const { data: post, error: postError } = await browserClient
     .from('posts')
     .insert({
       content,
       user_id,
-      nickname,
       is_anonymity,
     })
     .select()

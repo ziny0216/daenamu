@@ -4,6 +4,5 @@ export interface ProfileProps {
   className?: string;
   size?: 'md' | 'lg';
   is_anonymity?: boolean;
-  profile: Tables<'users'> | null;
-  handleUserProfile?: () => void;
+  profile: (Partial<Tables<'users'>> & { user_id?: string | null }) | null;
 }

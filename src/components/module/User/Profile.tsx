@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ProfileProps } from '@/types/components/module';
 import Image from 'next/image';
 import DefaultPf from '@/assets/icons/default-pf.svg';
+import { useRouter } from 'next/navigation';
 
 const profileSizes = {
   md: {
@@ -47,8 +48,14 @@ export default function Profile({
   className,
   is_anonymity = false,
   profile,
-  handleUserProfile,
 }: ProfileProps) {
+  const router = useRouter();
+  const handleUserProfile = () => {
+    const userId = profile?.user_id ?? profile?.id;
+    if (!is_anonymity) {
+      router.push(`/feed/${userId}`);
+    }
+  };
   return (
     <StyledProfile
       onClick={handleUserProfile}
@@ -57,7 +64,7 @@ export default function Profile({
       is_anonymity={is_anonymity}
     >
       <StyledImageBox size={size}>
-        {profile?.avatar_url ? (
+        {profile?.avatar_url && !is_anonymity ? (
           <Image
             fill
             sizes="30"
@@ -69,7 +76,7 @@ export default function Profile({
           <DefaultPf width={30} height={30} />
         )}
       </StyledImageBox>
-      <p className="nickname">{profile?.nickname}</p>
+      <p className="nickname">{is_anonymity ? '익명' : profile?.nickname}</p>
     </StyledProfile>
   );
 }

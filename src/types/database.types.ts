@@ -44,26 +44,31 @@ export type Database = {
           created_at: string
           id: string
           is_anonymity: boolean
-          nickname: string | null
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           content: string
           created_at?: string
           id?: string
           is_anonymity: boolean
-          nickname?: string | null
-          user_id?: string
+          user_id?: string | null
         }
         Update: {
           content?: string
           created_at?: string
           id?: string
           is_anonymity?: boolean
-          nickname?: string | null
-          user_id?: string
+          user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "posts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       users: {
         Row: {
@@ -97,7 +102,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_posts_with_images_and_user: {
+        Args: Record<PropertyKey, never>
+        Returns: Json[]
+      }
     }
     Enums: {
       [_ in never]: never

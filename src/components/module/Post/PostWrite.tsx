@@ -15,7 +15,9 @@ export default function PostWrite({
   onSubmit,
 }: {
   onSubmit: (
-    params: Omit<Tables<'posts'>, 'created_at' | 'id'> & { files: FileData[] },
+    params: Omit<Tables<'posts'>, 'created_at' | 'nickname' | 'id'> & {
+      files: FileData[];
+    },
   ) => void;
 }) {
   const userProfile = useSelector((state: RootState) => state.user.users);
@@ -48,7 +50,6 @@ export default function PostWrite({
       content: postContent,
       files: previewData,
       is_anonymity: isChecked,
-      nickname: userProfile.nickname,
       user_id: userProfile.id,
     };
     onSubmit(params);
