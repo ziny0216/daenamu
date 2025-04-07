@@ -16,7 +16,10 @@ export default function PostItem({
     <div className={styles.post_container}>
       <Profile is_anonymity={post.is_anonymity} profile={post.user} />
       <div className={styles.post_content}>
-        <Link href={'/'} className={type === 'list' ? 'ellipse3' : ''}>
+        <Link
+          href={`/post/${post.id}`}
+          className={type === 'list' ? 'ellipse3' : ''}
+        >
           {post.content}
         </Link>
       </div>

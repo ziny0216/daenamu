@@ -102,6 +102,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_post_with_images_and_user_by_id: {
+        Args: {
+          pid: string
+        }
+        Returns: Json
+      }
       get_posts_with_images_and_user: {
         Args: Record<PropertyKey, never>
         Returns: Json[]
