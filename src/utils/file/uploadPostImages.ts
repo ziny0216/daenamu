@@ -1,6 +1,6 @@
 import { FileData } from '@/types/components/common';
 import browserClient from '@/utils/supabaseClient';
-import { Tables } from '@/types/database.types';
+import { PostData } from '@/types/components/post';
 
 export const uploadPostImages = async (files: FileData[], userId: string) => {
   const uploadedUrls: string[] = [];
@@ -31,7 +31,7 @@ export const uploadPost = async ({
   files,
   user_id,
   is_anonymity,
-}: Omit<Tables<'posts'>, 'created_at' | 'nickname' | 'id'> & {
+}: PostData & {
   files: FileData[];
 }) => {
   const uploadedUrls = await uploadPostImages(files, user_id as string);

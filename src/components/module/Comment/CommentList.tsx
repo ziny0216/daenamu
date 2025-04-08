@@ -4,11 +4,18 @@ import CommentItem from '@/components/module/Comment/CommentItem';
 import browserClient from '@/utils/supabaseClient';
 import { CommentWriteType } from '@/types/components/comment';
 import { toast } from 'react-toastify';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Tables } from '@/types/database.types';
 import { PostWriter } from '@/types/components/post';
 
-export default function CommentList({ post_id }: { post_id: string }) {
+export default function CommentList({
+  postId,
+  setCmtCnt,
+}: {
+  postId: string;
+
+  setCmtCnt: Dispatch<SetStateAction<number>>;
+}) {
   const [commentList, setCommentList] = useState<
     (Tables<'comments'> & PostWriter)[]
   >([]);
@@ -20,12 +27,13 @@ export default function CommentList({ post_id }: { post_id: string }) {
       .insert({
         comment,
         user_id,
-        post_id,
+        post_id: postId,
       })
       .select()
       .single();
     if (data) {
       setCommentList(prev => [{ ...data, user }, ...prev]);
+      setCmtCnt(prev => prev + 1);
       toast('등록되었습니다.');
     }
     if (error) {
@@ -37,7 +45,7 @@ export default function CommentList({ post_id }: { post_id: string }) {
   useEffect(() => {
     const fetchComments = async () => {
       const { data, error } = await browserClient.rpc('get_comment_with_user', {
-        pid: post_id,
+        pid: postId,
       });
       if (error) {
         console.error('댓글 가져오기 에러:', error);

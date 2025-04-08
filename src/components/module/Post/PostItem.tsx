@@ -8,9 +8,11 @@ import Profile from '@/components/module/User/Profile';
 export default function PostItem({
   type,
   post,
+  viewerId,
 }: {
   type: 'list' | 'detail';
   post: PostWithImages & PostWriter;
+  viewerId?: string;
 }) {
   return (
     <div className={styles.post_container}>
@@ -25,7 +27,7 @@ export default function PostItem({
       </div>
       {post.images && <PostImageList files={post.images} listType={'list'} />}
 
-      <PostActionBar />
+      <PostActionBar post={post} userId={viewerId} />
     </div>
   );
 }

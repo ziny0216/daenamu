@@ -9,13 +9,13 @@ import { FileData } from '@/types/components/common';
 import Profile from '@/components/module/User/Profile';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
-import { Tables } from '@/types/database.types';
+import { PostData } from '@/types/components/post';
 
 export default function PostWrite({
   onSubmit,
 }: {
   onSubmit: (
-    params: Omit<Tables<'posts'>, 'created_at' | 'nickname' | 'id'> & {
+    params: PostData & {
       files: FileData[];
     },
   ) => void;

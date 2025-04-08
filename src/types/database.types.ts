@@ -77,26 +77,68 @@ export type Database = {
           },
         ]
       }
+      post_likes: {
+        Row: {
+          created_at: string
+          id: number
+          post_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          post_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          post_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_likes_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       posts: {
         Row: {
+          cmt_cnt: number
           content: string
           created_at: string
           id: string
           is_anonymity: boolean
+          like_cnt: number
           user_id: string | null
         }
         Insert: {
+          cmt_cnt?: number
           content: string
           created_at?: string
           id?: string
           is_anonymity: boolean
+          like_cnt?: number
           user_id?: string | null
         }
         Update: {
+          cmt_cnt?: number
           content?: string
           created_at?: string
           id?: string
           is_anonymity?: boolean
+          like_cnt?: number
           user_id?: string | null
         }
         Relationships: [
@@ -146,11 +188,11 @@ export type Database = {
         Returns: Json[]
       }
       get_post_with_images_and_user_by_id: {
-        Args: { pid: string }
+        Args: { pid: string } | { pid: string; uid: string }
         Returns: Json
       }
       get_posts_with_images_and_user: {
-        Args: Record<PropertyKey, never>
+        Args: Record<PropertyKey, never> | { uid: string }
         Returns: Json[]
       }
     }

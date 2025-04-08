@@ -79,7 +79,14 @@ const StyledButton = styled('button').withConfig({
   transition: background-color 0.3s ease-in-out;
   font-weight: var(--font-weight-m);
 
-  ${({ size = 'xs', isIcon }) => (isIcon ? iconSize[size] : btnSize[size])}
+  ${({ size = 'xs', isIcon }) =>
+    isIcon
+      ? `
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  `
+      : btnSize[size]}
   ${({ color = 'default' }) => btnColor[color]}
     &:disabled {
     opacity: var(--disable-opacity);
@@ -92,11 +99,22 @@ const StyledButton = styled('button').withConfig({
         : btnColor[color]?.hover};
   }
 `;
+const StyledButtonIcon = styled('span').withConfig({
+  shouldForwardProp: prop => prop !== 'isIcon',
+})<ButtonProps>`
+  ${({ size = 'xs', isIcon }) => (isIcon ? iconSize[size] : btnSize[size])}
+  padding: 0;
 
+  & + span {
+    line-height: var(--line-height-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+  }
+`;
 export default function Button({ icon, ...btn }: ButtonProps) {
   return (
     <StyledButton {...btn}>
-      {icon}
+      <StyledButtonIcon>{icon}</StyledButtonIcon>
       {btn.title && <span>{btn.title}</span>}
     </StyledButton>
   );

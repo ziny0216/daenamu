@@ -4,10 +4,9 @@ import PostWrite from '@/components/module/Post/PostWrite';
 import styles from '@/components/module/Post/Post.module.css';
 import { uploadPost } from '@/utils/file/uploadPostImages';
 import { toast } from 'react-toastify';
-import { Tables } from '@/types/database.types';
 import { FileData } from '@/types/components/common';
 import { useEffect, useState } from 'react';
-import { PostWithImages, PostWriter } from '@/types/components/post';
+import { PostData, PostWithImages, PostWriter } from '@/types/components/post';
 import browserClient from '@/utils/supabaseClient';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
@@ -17,7 +16,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
 
   const userProfile = useSelector((state: RootState) => state.user.users);
   const submitPost = async (
-    params: Omit<Tables<'posts'>, 'created_at' | 'nickname' | 'id'> & {
+    params: PostData & {
       files: FileData[];
     },
   ) => {
@@ -27,6 +26,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
         {
           ...post,
           images,
+          is_like: false,
           user: userProfile
             ? {
                 user_id: userProfile.id,
@@ -48,6 +48,9 @@ export default function PostList({ keyword }: { keyword?: string }) {
     const fetchPosts = async () => {
       const { data, error } = await browserClient.rpc(
         'get_posts_with_images_and_user',
+        {
+          uid: userProfile.id,
+        },
       );
 
       if (error) {
@@ -70,7 +73,12 @@ export default function PostList({ keyword }: { keyword?: string }) {
         </div>
       )}
       {postList.map(post => (
-        <PostItem key={post.id} type={'list'} post={post} />
+        <PostItem
+          key={post.id}
+          type={'list'}
+          post={post}
+          viewerId={userProfile.id}
+        />
       ))}
     </>
   );

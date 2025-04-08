@@ -18,7 +18,11 @@ export type PostDetail = {
     avatar_url: string | null;
   } | null;
 };
-
+export type PostData = {
+  content: string;
+  is_anonymity: boolean;
+  user_id: string | null;
+};
 export type PostWriter = {
   user: {
     user_id: string | null;
@@ -28,4 +32,5 @@ export type PostWriter = {
 };
 export type PostWithImages = Tables<'posts'> & {
   images: Tables<'post_images'>[];
+  is_like: boolean;
 };
