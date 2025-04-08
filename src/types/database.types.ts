@@ -142,7 +142,7 @@ export type Database = {
     }
     Functions: {
       get_comment_with_user: {
-        Args: Record<PropertyKey, never>
+        Args: Record<PropertyKey, never> | { pid: string }
         Returns: Json[]
       }
       get_post_with_images_and_user_by_id: {

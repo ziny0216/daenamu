@@ -36,7 +36,9 @@ export default function CommentList({ post_id }: { post_id: string }) {
 
   useEffect(() => {
     const fetchComments = async () => {
-      const { data, error } = await browserClient.rpc('get_comment_with_user');
+      const { data, error } = await browserClient.rpc('get_comment_with_user', {
+        pid: post_id,
+      });
       if (error) {
         console.error('댓글 가져오기 에러:', error);
         return;
