@@ -1,7 +1,6 @@
 'use client';
 import PostItem from '@/components/module/Post/PostItem';
 import PostWrite from '@/components/module/Post/PostWrite';
-import styles from '@/components/module/Post/Post.module.css';
 import { uploadPost } from '@/utils/file/uploadPostImages';
 import { toast } from 'react-toastify';
 import { FileData } from '@/types/components/common';
@@ -10,11 +9,16 @@ import { PostData, PostWithImages, PostWriter } from '@/types/components/post';
 import browserClient from '@/utils/supabaseClient';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
+import { usePathname } from 'next/navigation';
+import PostHeader from '@/components/module/Post/PostHeader';
 
 export default function PostList({ keyword }: { keyword?: string }) {
-  const [postList, setPostList] = useState<(PostWithImages & PostWriter)[]>([]);
+  const pathName = usePathname();
+  const sortType = pathName.includes('/hot') ? 'popular' : 'recent';
 
+  const [postList, setPostList] = useState<(PostWithImages & PostWriter)[]>([]);
   const userProfile = useSelector((state: RootState) => state.user.users);
+
   const submitPost = async (
     params: PostData & {
       files: FileData[];
@@ -51,6 +55,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
         'get_posts_with_images_and_user',
         {
           uid: userProfile.id,
+          sort: sortType,
         },
       );
 
@@ -68,11 +73,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
   return (
     <>
       {!keyword && <PostWrite onSubmit={submitPost} />}
-      {keyword && (
-        <div className={styles.post_header}>
-          <h2 className={styles.search_tot}>검색 결과 5건</h2>
-        </div>
-      )}
+      <PostHeader type={keyword ? 'search' : sortType} />
       {postList.map(post => (
         <PostItem
           key={post.id}

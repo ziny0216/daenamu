@@ -55,3 +55,12 @@
     z-index: 10;
 }
 
+.post_header {
+    padding: 16px 4px;
+}
+
+.post_header .search_tot {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-lg);
+}
