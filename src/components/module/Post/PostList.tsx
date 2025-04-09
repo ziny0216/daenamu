@@ -45,6 +45,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
   };
 
   useEffect(() => {
+    if (!userProfile?.id) return;
     const fetchPosts = async () => {
       const { data, error } = await browserClient.rpc(
         'get_posts_with_images_and_user',
@@ -62,7 +63,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
     };
 
     fetchPosts();
-  }, []);
+  }, [userProfile?.id]);
 
   return (
     <>
