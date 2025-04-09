@@ -47,7 +47,7 @@ export default function FileInput({
     <StyledFileWrapper className={className}>
       <label htmlFor={id}>{icon}</label>
       <StyledFileInput
-        accept=".png,.jpg"
+        accept="image/*"
         type={type}
         onChange={onChange}
         id={id}
