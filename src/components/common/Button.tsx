@@ -78,15 +78,13 @@ const StyledButton = styled('button').withConfig({
 
   transition: background-color 0.3s ease-in-out;
   font-weight: var(--font-weight-m);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
 
-  ${({ size = 'xs', isIcon }) =>
-    isIcon
-      ? `
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  `
-      : btnSize[size]}
+  ${({ size = 'xs', isIcon, title }) =>
+    isIcon && title ? '' : isIcon ? iconSize[size] : btnSize[size]}
   ${({ color = 'default' }) => btnColor[color]}
     &:disabled {
     opacity: var(--disable-opacity);
@@ -114,7 +112,8 @@ const StyledButtonIcon = styled('span').withConfig({
 export default function Button({ icon, ...btn }: ButtonProps) {
   return (
     <StyledButton {...btn}>
-      <StyledButtonIcon>{icon}</StyledButtonIcon>
+      {icon && <StyledButtonIcon>{icon}</StyledButtonIcon>}
+
       {btn.title && <span>{btn.title}</span>}
     </StyledButton>
   );
