@@ -187,6 +187,10 @@ export type Database = {
         Args: Record<PropertyKey, never> | { pid: string }
         Returns: Json[]
       }
+      get_liked_posts_with_user: {
+        Args: { uid: string }
+        Returns: Json[]
+      }
       get_post_with_images_and_user_by_id: {
         Args: { pid: string } | { pid: string; uid: string }
         Returns: Json

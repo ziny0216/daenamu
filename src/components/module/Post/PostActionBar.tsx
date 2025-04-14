@@ -18,7 +18,6 @@ export default function PostActionBar({
   const router = useRouter();
   const handleToggleLike = async (isLike: boolean) => {
     if (!userId) return;
-    console.log(isLike, 'isLike');
     if (isLike) {
       const { error } = await browserClient.from('post_likes').insert({
         user_id: userId,
