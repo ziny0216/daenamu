@@ -9,7 +9,7 @@ import { Tables } from '@/types/database.types';
 export const usePostList = (
   userProfile: Tables<'users'>,
   sortType: 'popular' | 'recent',
-  keyword: string | null,
+  keyword?: string,
 ) => {
   const [postList, setPostList] = useState<(PostWithImages & PostWriter)[]>([]);
   const [postCnt, setPostCnt] = useState(0);

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { usePostList } from '@/hooks/post/usePostList';
 
-export default function PostList({ keyword }: { keyword: string | null }) {
+export default function PostList({ keyword }: { keyword?: string }) {
   const pathName = usePathname();
   const sortType = pathName.includes('/hot') ? 'popular' : 'recent';
   const userProfile = useSelector((state: RootState) => state.user.users);
