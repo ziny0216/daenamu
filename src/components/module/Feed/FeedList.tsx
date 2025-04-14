@@ -9,10 +9,8 @@ import { Tables } from '@/types/database.types';
 import browserClient from '@/utils/supabaseClient';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
-import { useRouter } from 'next/navigation';
 
 export default function FeedList({ feedId }: { feedId: string }) {
-  const router = useRouter();
   const [feedProfile, setFeedProfile] = useState<Tables<'users'> | null>(null);
   const userProfile = useSelector((state: RootState) => state.user.users);
   useEffect(() => {
