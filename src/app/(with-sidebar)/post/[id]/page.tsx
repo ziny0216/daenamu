@@ -18,7 +18,6 @@ export default async function Page({
     'get_post_with_images_and_user_by_id',
     { pid: id, uid: user?.id },
   );
-  console.log(data, 'data');
   if (error || !data) {
     return notFound();
   }

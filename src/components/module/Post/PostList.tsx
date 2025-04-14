@@ -11,11 +11,12 @@ export default function PostList({ keyword }: { keyword?: string }) {
   const pathName = usePathname();
   const sortType = pathName.includes('/hot') ? 'popular' : 'recent';
   const userProfile = useSelector((state: RootState) => state.user.users);
-  const { postList, submitPost, postCnt } = usePostList(
+  const { postList, submitPost, postCnt } = usePostList({
     userProfile,
     sortType,
-    keyword,
-  );
+    only_mine: false,
+    keyword: keyword,
+  });
 
   return (
     <>

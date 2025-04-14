@@ -6,11 +6,19 @@ import { useEffect, useState } from 'react';
 import browserClient from '@/utils/supabaseClient';
 import { Tables } from '@/types/database.types';
 
-export const usePostList = (
-  userProfile: Tables<'users'>,
-  sortType: 'popular' | 'recent',
-  keyword?: string,
-) => {
+export const usePostList = ({
+  userProfile,
+  sortType,
+  only_mine,
+  target_user_id,
+  keyword,
+}: {
+  userProfile: Tables<'users'>;
+  sortType: 'popular' | 'recent';
+  only_mine: boolean;
+  target_user_id?: string;
+  keyword?: string;
+}) => {
   const [postList, setPostList] = useState<(PostWithImages & PostWriter)[]>([]);
   const [postCnt, setPostCnt] = useState(0);
 
@@ -46,16 +54,19 @@ export const usePostList = (
 
   // 기본 게시물 리스트
   useEffect(() => {
-    if (!userProfile?.id || keyword) return;
+    if (!userProfile?.id) return;
     const fetchPosts = async () => {
       const { data, error } = await browserClient.rpc(
         'get_posts_with_images_and_user',
         {
           uid: userProfile.id,
           sort: sortType,
+          only_mine,
+          target_user_id,
+          keyword,
         },
       );
-
+      console.log(data, 'data');
       if (error) {
         console.error('포스트 가져오기 에러:', error);
         return;
@@ -65,27 +76,24 @@ export const usePostList = (
     };
 
     fetchPosts();
-  }, [userProfile?.id]);
+  }, [userProfile?.id, keyword]);
 
-  // 검색어 게시물 리스트
+  // 검색 게시물 개수
   useEffect(() => {
     if (!keyword) return;
-    const fetchSearchPosts = async () => {
-      const { data, count, error } = await browserClient
+    const fetchSearchPostCnt = async () => {
+      const { count, error } = await browserClient
         .from('posts')
-        .select('*', { count: 'exact' })
-        .textSearch('content', keyword);
+        .select('id', { count: 'exact', head: true })
+        .ilike('content', `%${keyword}%`);
 
       if (error) {
-        console.error('포스트 가져오기 에러:', error);
+        console.error('검색된 포스트 가져오기 에러:', error);
         return;
       }
-
-      setPostList(data as (PostWithImages & PostWriter)[]);
       setPostCnt(count ?? 0);
     };
-    fetchSearchPosts();
+    fetchSearchPostCnt();
   }, [keyword]);
-
   return { postList, submitPost, postCnt };
 };

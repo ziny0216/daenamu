@@ -192,10 +192,13 @@ export type Database = {
         Returns: Json
       }
       get_posts_with_images_and_user: {
-        Args:
-          | Record<PropertyKey, never>
-          | { uid: string; sort: string }
-          | { uid: string }
+        Args: {
+          uid: string
+          sort: string
+          only_mine?: boolean
+          target_user_id?: string
+          keyword?: string
+        }
         Returns: Json[]
       }
     }
