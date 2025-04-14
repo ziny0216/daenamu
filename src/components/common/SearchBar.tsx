@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Input from '@/components/common/Input';
 import SearchIcon from '@/assets/icons/icon-search.svg';
 import { useRouter } from 'next/navigation';
+import { ChangeEvent, useState } from 'react';
 
 const SearchBarWrapper = styled.div`
   display: flex;
@@ -25,12 +26,27 @@ const StyledButton = styled.button`
 
 export default function SearchBar() {
   const router = useRouter();
+  const [keyword, setKeyword] = useState('');
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleClick();
+    }
+  };
   const handleClick = () => {
-    router.push(`/search?keyword=${'ddd'}`);
+    router.push(`/search?keyword=${keyword}`);
   };
   return (
     <SearchBarWrapper>
-      <StyledInput color={'bottomBorder'} placeholder={'검색어 입력'} />
+      <StyledInput
+        onChange={onChange}
+        color={'bottomBorder'}
+        placeholder={'검색어 입력'}
+        onKeyDown={onKeyDown}
+      />
       <StyledButton onClick={handleClick}>
         <SearchIcon width="16" height="16" />
       </StyledButton>

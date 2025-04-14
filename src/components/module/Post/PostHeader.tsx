@@ -2,15 +2,17 @@ import styles from '@/components/module/Post/Post.module.css';
 
 export default function PostHeader({
   type,
+  postCount,
 }: {
   type: 'search' | 'popular' | 'recent';
+  postCount: number;
 }) {
   if (type === 'recent') return;
   return (
     <>
       {type === 'search' && (
         <div className={styles.post_header}>
-          <h2 className={styles.search_tot}>검색 결과 5건</h2>
+          <h2 className={styles.search_tot}>검색 결과 {postCount}건</h2>
         </div>
       )}
       {type === 'popular' && (
