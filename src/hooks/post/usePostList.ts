@@ -66,7 +66,6 @@ export const usePostList = ({
           keyword,
         },
       );
-      console.log(data, 'data');
       if (error) {
         console.error('포스트 가져오기 에러:', error);
         return;
@@ -76,7 +75,7 @@ export const usePostList = ({
     };
 
     fetchPosts();
-  }, [userProfile?.id, keyword]);
+  }, [keyword, only_mine, sortType, target_user_id, userProfile.id]);
 
   // 검색 게시물 개수
   useEffect(() => {
