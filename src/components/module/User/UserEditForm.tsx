@@ -59,7 +59,7 @@ export default function UserEditForm() {
       <UserInfo
         form={form}
         onChange={onChange}
-        isEdit
+        isEdit={userProfile.provider === 'email'}
         user={userProfile}
         setPassword={setPassword}
         setNewPassword={setNewPassword}
