@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 
 export function Header() {
-  const { profile } = useProfileInfo();
-
+  useProfileInfo();
+  const userProfile = useSelector((state: RootState) => state.user.users);
   const isRecovery = useSelector((state: RootState) => state.user.isRecovery);
 
   return (
@@ -22,8 +22,8 @@ export function Header() {
         {!isRecovery && (
           <div className={styles.right_content}>
             <SearchBar />
-            {profile ? (
-              <Profile is_anonymity={false} profile={profile} />
+            {userProfile ? (
+              <Profile is_anonymity={false} profile={userProfile} />
             ) : (
               <div className="line_group">
                 <Link className="line_item" href={'/auth/login'}>

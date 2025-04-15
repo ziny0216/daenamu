@@ -3,50 +3,34 @@
 import UserRegisterForm from '@/components/module/User/UserRegisterForm';
 import UserLoginForm from '@/components/module/User/UserLoginForm';
 import Button from '@/components/common/Button';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useForm } from '@/hooks/common/useForm';
 import browserClient from '@/utils/supabaseClient';
 import { useRouter } from 'next/navigation';
 import LoadingButton from '@/components/common/LoadingButton';
 import { toast } from 'react-toastify';
+import { uploadUserImage } from '@/utils/file/uploadUserImage';
 
 export default function Page() {
   const router = useRouter();
   const [joinStep, setJoinStep] = useState<'first' | 'last'>('first');
   const [profileData, setProfileData] = useState<File>();
-  const { form, onChange, error, isValid } = useForm(joinStep);
+  const { form, onChange, error, isValid, setPassword, setNewPassword } =
+    useForm(joinStep);
   const handleJoinStep = (step: 'first' | 'last') => {
     setJoinStep(step);
   };
 
-  const getAvatarUrl = async () => {
-    if (!profileData) return false;
-    const fileName = `${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-    const { data, error } = await browserClient.storage
-      .from('avatars')
-      .upload(fileName, profileData);
-
-    if (!data || error) {
-      console.error('Upload failed:', error);
-      return;
-    }
-
-    const {
-      data: { publicUrl },
-    } = browserClient.storage.from('avatars').getPublicUrl(data.path);
-
-    onChange({
-      target: { value: publicUrl, name: 'avatar_url' },
-    } as ChangeEvent<HTMLInputElement>);
-
-    return true;
-  };
   const handleUserRegister = async (e: FormEvent) => {
     e.preventDefault(); // 기본 form 제출 방지
 
-    const avatar_url = await getAvatarUrl();
-
-    if (!avatar_url) alert('잠시 후 다시 시도 해주세요');
+    if (profileData) {
+      const avatar_url = await uploadUserImage(profileData, onChange);
+      if (!avatar_url) {
+        alert('잠시 후 다시 시도해주세요.');
+        return;
+      }
+    }
 
     const { error } = await browserClient.auth.signUp({
       email: form.email as string,
@@ -90,7 +74,13 @@ export default function Page() {
       )}
       {joinStep === 'last' && (
         <>
-          <UserRegisterForm setProfileData={setProfileData} />
+          <UserRegisterForm
+            setPassword={setPassword}
+            setNewPassword={setNewPassword}
+            form={form}
+            onChange={onChange}
+            setProfileData={setProfileData}
+          />
           <div className="btn_group full">
             <Button
               size={'md'}

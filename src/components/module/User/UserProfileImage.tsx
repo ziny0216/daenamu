@@ -9,22 +9,19 @@ import { FileData } from '@/types/components/common';
 import { useState } from 'react';
 
 export default function UserProfileImage({
-  isSignup,
+  initialProfile,
   setProfileData,
 }: {
-  isSignup: boolean;
+  initialProfile?: string | null;
   setProfileData: (file: File) => void;
 }) {
-  const [preview, setPreview] = useState('');
-  const handleSignupFile = (files: FileData[]) => {
+  const [preview, setPreview] = useState(initialProfile ?? null);
+  const handleProfileFile = (files: FileData[]) => {
     if (!files) return;
     setProfileData(files[0].file);
     setPreview(files[0].image_url);
   };
 
-  const handleEditFile = () => {
-    console.log('회원정보 수정시 ');
-  };
   return (
     <div className={styles.profile_edit}>
       <div className={styles.img_box}>
@@ -42,7 +39,7 @@ export default function UserProfileImage({
 
         <FileInput
           id={'profile_img'}
-          handleFileChange={isSignup ? handleSignupFile : handleEditFile}
+          handleFileChange={handleProfileFile}
           icon={<EditIcon />}
           className={styles.profile_input}
         />

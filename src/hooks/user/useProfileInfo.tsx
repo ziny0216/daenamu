@@ -1,22 +1,20 @@
 import browserClient from '@/utils/supabaseClient';
-import { useCallback, useEffect, useState } from 'react';
-import { Tables } from '@/types/database.types';
+import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUser } from '@/lib/features/user/userSlice';
+import { clearUser, setUser } from '@/lib/features/user/userSlice';
 
 export default function useProfileInfo() {
   const supabase = browserClient;
   const dispatch = useDispatch();
-  const [profile, setProfile] = useState<Tables<'users'> | null>(null);
 
   useEffect(() => {
     //로그인 상태 감지 후 `getProfile()` 실행
     const { data: authListener } = browserClient.auth.onAuthStateChange(
       async (event, session) => {
         if (session?.user) {
-          getProfile(session.user.id);
+          await getProfile(session.user.id);
         } else {
-          setProfile(null);
+          dispatch(clearUser());
         }
       },
     );
@@ -42,7 +40,6 @@ export default function useProfileInfo() {
           throw error;
         }
         if (data) {
-          setProfile(data);
           dispatch(setUser(data));
         }
       } catch (e) {
@@ -51,6 +48,4 @@ export default function useProfileInfo() {
     },
     [dispatch, supabase],
   );
-
-  return { profile };
 }
