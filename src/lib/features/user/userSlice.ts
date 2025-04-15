@@ -24,6 +24,7 @@ const initialState: UserState = {
     id: '',
     introduce: '',
     nickname: '',
+    provider: '',
   },
   form: {
     avatar_url: '',
