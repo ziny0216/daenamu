@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.5.0",
+    "@reduxjs/toolkit": "^2.7.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.48.1",
     "@svgr/webpack": "^8.1.0",
@@ -20,7 +20,8 @@
     "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
     "styled-components": "^6.1.14",
-    "supabase": "^2.20.12"
+    "supabase": "^2.20.12",
+    "vercel": "^41.6.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

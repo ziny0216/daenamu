@@ -155,27 +155,33 @@ export type Database = {
         Row: {
           avatar_url: string | null
           created_at: string
+          delete_at: string | null
           email: string
           id: string
           introduce: string | null
+          is_delete: boolean | null
           nickname: string
           provider: string | null
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string
+          delete_at?: string | null
           email: string
           id?: string
           introduce?: string | null
+          is_delete?: boolean | null
           nickname: string
           provider?: string | null
         }
         Update: {
           avatar_url?: string | null
           created_at?: string
+          delete_at?: string | null
           email?: string
           id?: string
           introduce?: string | null
+          is_delete?: boolean | null
           nickname?: string
           provider?: string | null
         }
@@ -186,6 +192,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      delete_account: {
+        Args: { uid: string }
+        Returns: undefined
+      }
+      deleteaccount: {
+        Args: { uid: string }
+        Returns: undefined
+      }
       get_comment_with_user: {
         Args: Record<PropertyKey, never> | { pid: string }
         Returns: Json[]

@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { uploadUserImage } from '@/utils/file/uploadUserImage';
 import { useForm } from '@/hooks/common/useForm';
-import { setUser } from '@/lib/features/user/userSlice';
+import { clearUser, setUser } from '@/lib/features/user/userSlice';
 
 export default function UserEditForm() {
   const router = useRouter();
@@ -50,6 +50,21 @@ export default function UserEditForm() {
     dispatch(setUser(data[0]));
   };
 
+  const confirmWithdrawalUser = async () => {
+    const { error } = await browserClient.rpc('delete_account', {
+      uid: userProfile.id,
+    });
+
+    if (!error) {
+      await browserClient.auth.signOut();
+      dispatch(clearUser());
+      router.replace('/auth/login');
+      alert('탈퇴가 완료되었습니다.');
+    } else {
+      alert('탈퇴 중 오류가 발생했습니다.');
+    }
+  };
+
   return (
     <div className={styles.form_group}>
       <UserProfileImage
@@ -63,6 +78,12 @@ export default function UserEditForm() {
         user={userProfile}
         setPassword={setPassword}
         setNewPassword={setNewPassword}
+      />
+      <Button
+        size={'xs'}
+        color={'decoration'}
+        title={'회원 탈퇴'}
+        onClick={confirmWithdrawalUser}
       />
       <div className="btn_group full">
         <Button size={'md'} title={'수정'} onClick={handleForm} />

@@ -50,6 +50,7 @@ export default function Page() {
         email: form.email as string,
         password: form.password,
       });
+
       if (error) {
         if (error.code === 'invite_not_found') {
           toast('이메일 인증이 만료되었습니다');
@@ -57,6 +58,23 @@ export default function Page() {
         }
         toast(error.message);
       } else {
+        const {
+          data: { user },
+        } = await browserClient.auth.getUser();
+
+        const { data: profile } = await browserClient
+          .from('users')
+          .select('is_delete')
+          .eq('id', user!.id)
+          .single();
+
+        if (profile?.is_delete) {
+          await browserClient.auth.signOut();
+          alert('탈퇴한 계정으로는 로그인할 수 없습니다.');
+          router.replace('/auth/login');
+          return;
+        }
+
         toast('로그인 성공');
         router.push('/');
       }
