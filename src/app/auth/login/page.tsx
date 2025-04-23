@@ -20,6 +20,9 @@ export default function Page() {
     if (errorCode === 'otp_expired') {
       console.log(errorCode, 'errorCode');
     }
+    if (errorCode === 'withdrawal') {
+      alert('탈퇴한 계정입니다.');
+    }
   }, [router, errorCode]);
   // 이메일 인증 만료된 사용자 재전송
   const resendEmail = async () => {

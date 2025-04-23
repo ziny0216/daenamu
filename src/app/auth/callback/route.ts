@@ -10,6 +10,24 @@ export const GET = async (request: Request) => {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user?.id) return;
+    const { data: profile } = await supabase
+      .from('users')
+      .select('is_delete')
+      .eq('id', user.id)
+      .single();
+    if (profile?.is_delete) {
+      await supabase.auth.signOut();
+      // 서버에서
+      return NextResponse.redirect(
+        `${origin}/auth/login?error_code=withdrawal`,
+      );
+    }
+
     if (!error) {
       const forwardedHost = request.headers.get('x-forwarded-host');
       const isLocalEnv = process.env.NODE_ENV === 'development';
