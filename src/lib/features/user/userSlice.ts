@@ -24,6 +24,8 @@ const initialState: UserState = {
     introduce: '',
     nickname: '',
     provider: '',
+    is_delete: false,
+    delete_at: '',
   },
   form: {
     avatar_url: '',
