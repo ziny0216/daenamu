@@ -24,7 +24,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg';
   borderradius?: 'lg' | 'md';
-  color?: 'default' | 'transparent' | 'foreground' | 'decoration';
+  color?: 'default' | 'transparent' | 'foreground' | 'decoration' | 'warn';
   onClick?: () => void;
   isIcon?: boolean;
   icon?: ReactNode;

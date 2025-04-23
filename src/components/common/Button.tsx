@@ -33,6 +33,12 @@ const btnColor = {
       backgroundColor: 'var(--default-300)',
     },
   },
+  warn: {
+    backgroundColor: 'var(--red)',
+    hover: {
+      backgroundColor: 'var(--red-hover)',
+    },
+  },
   transparent: {
     backgroundColor: 'transparent',
   },

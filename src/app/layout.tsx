@@ -21,6 +21,7 @@ export default function RootLayout({
           </StoreProvider>
         </StyledComponentsRegistry>
         <ToastProvider />
+        <div id="modal"></div>
       </body>
     </html>
   );

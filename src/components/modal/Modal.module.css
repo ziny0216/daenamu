@@ -1,0 +1,79 @@
+
+.modal_wrap {
+    max-width: 500px;
+    width: calc(100% - 32px);
+    border-radius: 16px;
+    min-height: 180px;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+}
+
+.modal_header {
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: fixed;
+    max-width: 500px;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+}
+
+.modal_header .title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    font-weight: var(--font-weight-bold);
+}
+
+.modal_header .title button {
+    margin-left: auto;
+}
+
+.modal_body {
+    padding: 16px 16px 0
+}
+
+.modal_body.lg {
+    padding: 64px 16px 0;
+}
+
+.modal_body .modal_inner {
+    overflow: auto;
+}
+
+.modal_footer {
+    padding: 16px;
+
+}
+
+/* 컨펌 */
+.confirm_modal {
+    max-width: 320px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.confirm_modal .modal_body .modal_inner {
+    max-height: 180px;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm_box {
+
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    font-weight: var(--font-weight-m);
+
+}
+

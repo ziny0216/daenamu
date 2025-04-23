@@ -4,6 +4,8 @@
     --foreground: #ECEDEE;
     --divider: #ffffff26;
     --focus: #006FEE;
+    --red: #FD6F8E;
+    --red-hover: #ff7e97;
 
     --content1: #18181b;
     --content2: #27272a;
@@ -26,7 +28,7 @@
     --border-radius-md: 16px;
     --border-radius-sm: 8px;
     --border-radius-xs: 4px;
-    
+
     --font-size-xxs: 10px;
     --font-size-xs: 12px;
     --font-size-sm: 14px;
