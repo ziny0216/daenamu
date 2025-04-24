@@ -12,24 +12,22 @@ import { useState } from 'react';
 import { uploadUserImage } from '@/utils/file/uploadUserImage';
 import { useForm } from '@/hooks/common/useForm';
 import { clearUser, setUser } from '@/lib/features/user/userSlice';
+import { useModal } from '@/hooks/common/useModal';
 
 export default function UserEditForm() {
   const router = useRouter();
   const dispatch = useDispatch();
   const userProfile = useSelector((state: RootState) => state.user.users);
+  const { openConfirmModal } = useModal();
   const { form, onChange, setPassword, setNewPassword } = useForm(
     'first',
     userProfile,
   );
   const [profileData, setProfileData] = useState<File>();
-
   const handleForm = async () => {
+    let avatar_url;
     if (profileData) {
-      const avatar_url = await uploadUserImage(profileData, onChange);
-      if (!avatar_url) {
-        alert('잠시 후 다시 시도해주세요.');
-        return;
-      }
+      avatar_url = await uploadUserImage(profileData);
     }
 
     const { data, error } = await browserClient
@@ -37,7 +35,7 @@ export default function UserEditForm() {
       .update({
         nickname: form.nickname,
         introduce: form.introduce,
-        avatar_url: form.avatar_url,
+        avatar_url,
       })
       .eq('id', userProfile.id)
       .select();
@@ -50,7 +48,16 @@ export default function UserEditForm() {
     dispatch(setUser(data[0]));
   };
 
-  const confirmWithdrawalUser = async () => {
+  const confirmWithdrawalUser = () => {
+    openConfirmModal({
+      modalText: `${userProfile.nickname}님 정말 탈퇴하시겠습니까?🥺`,
+      onConfirm: async () => {
+        await withdrawalUser();
+      },
+    });
+  };
+
+  const withdrawalUser = async () => {
     const { error } = await browserClient.rpc('delete_account', {
       uid: userProfile.id,
     });
@@ -64,7 +71,6 @@ export default function UserEditForm() {
       alert('탈퇴 중 오류가 발생했습니다.');
     }
   };
-
   return (
     <div className={styles.form_group}>
       <UserProfileImage
@@ -86,8 +92,8 @@ export default function UserEditForm() {
         onClick={confirmWithdrawalUser}
       />
       <div className="btn_group full">
-        <Button size={'md'} title={'수정'} onClick={handleForm} />
         <Button size={'md'} title={'취소'} onClick={() => router.back()} />
+        <Button size={'md'} title={'수정'} onClick={handleForm} />
       </div>
     </div>
   );

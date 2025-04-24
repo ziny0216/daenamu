@@ -11,9 +11,7 @@ export const ToastProvider = () => {
       newestOnTop={false}
       closeOnClick
       rtl={false}
-      pauseOnFocusLoss
       draggable
-      pauseOnHover={false}
       theme="dark"
       transition={Slide}
     />

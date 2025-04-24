@@ -23,13 +23,9 @@ export default function Page() {
 
   const handleUserRegister = async (e: FormEvent) => {
     e.preventDefault(); // 기본 form 제출 방지
-
+    let avatar_url;
     if (profileData) {
-      const avatar_url = await uploadUserImage(profileData, onChange);
-      if (!avatar_url) {
-        alert('잠시 후 다시 시도해주세요.');
-        return;
-      }
+      avatar_url = await uploadUserImage(profileData);
     }
 
     const { error } = await browserClient.auth.signUp({
@@ -39,7 +35,7 @@ export default function Page() {
         data: {
           nickname: form.nickname,
           introduce: form.introduce,
-          avatar_url: form.avatar_url,
+          avatar_url,
         },
         emailRedirectTo: `${window.location.origin}/auth/login`,
       },

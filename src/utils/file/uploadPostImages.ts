@@ -10,7 +10,6 @@ export const uploadPostImages = async (files: FileData[], userId: string) => {
     const { data, error } = await browserClient.storage
       .from('post-images')
       .upload(filePath, file, {
-        cacheControl: '3600',
         upsert: false,
       });
 
