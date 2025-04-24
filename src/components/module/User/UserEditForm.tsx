@@ -24,6 +24,16 @@ export default function UserEditForm() {
     userProfile,
   );
   const [profileData, setProfileData] = useState<File>();
+
+  const confirmForm = () => {
+    openConfirmModal({
+      modalText: '수정하시겠습니까?',
+      onConfirm: async () => {
+        await handleForm();
+      },
+    });
+  };
+
   const handleForm = async () => {
     let avatar_url;
     if (profileData) {
@@ -66,9 +76,9 @@ export default function UserEditForm() {
       await browserClient.auth.signOut();
       dispatch(clearUser());
       router.replace('/auth/login');
-      alert('탈퇴가 완료되었습니다.');
+      toast('탈퇴가 완료되었습니다.');
     } else {
-      alert('탈퇴 중 오류가 발생했습니다.');
+      toast('탈퇴 중 오류가 발생했습니다.');
     }
   };
   return (
@@ -93,7 +103,7 @@ export default function UserEditForm() {
       />
       <div className="btn_group full">
         <Button size={'md'} title={'취소'} onClick={() => router.back()} />
-        <Button size={'md'} title={'수정'} onClick={handleForm} />
+        <Button size={'md'} title={'수정'} onClick={confirmForm} />
       </div>
     </div>
   );

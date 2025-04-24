@@ -21,7 +21,7 @@ export default function Page() {
       console.log(errorCode, 'errorCode');
     }
     if (errorCode === 'withdrawal') {
-      alert('탈퇴한 계정입니다.');
+      toast('탈퇴한 계정입니다.');
     }
   }, [router, errorCode]);
   // 이메일 인증 만료된 사용자 재전송
@@ -73,7 +73,7 @@ export default function Page() {
 
         if (profile?.is_delete) {
           await browserClient.auth.signOut();
-          alert('탈퇴한 계정으로는 로그인할 수 없습니다.');
+          toast('탈퇴한 계정으로는 로그인할 수 없습니다.');
           router.replace('/auth/login');
           return;
         }
