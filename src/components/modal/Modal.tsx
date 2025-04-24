@@ -1,10 +1,11 @@
 'use client';
 
 import { createPortal } from 'react-dom';
-import { ReactNode, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Button from '@/components/common/Button';
 import CloseIcon from '@/assets/icons/icon-close.svg';
 import styles from './Modal.module.css';
+import { ModalPropsType } from '@/types/components/modal';
 
 export default function Modal({
   title,
@@ -12,23 +13,12 @@ export default function Modal({
   isOpen,
   children,
   onClose,
-  cancelText = '취소',
-  confirmText = '확인',
+  cancelText,
+  confirmText,
   isShowHeader = true,
   onClickCancel,
   onClickConfirm,
-}: {
-  title?: string;
-  className?: string;
-  cancelText?: string;
-  confirmText?: string;
-  isOpen: boolean;
-  children: ReactNode;
-  isShowHeader?: boolean;
-  onClose?: () => void;
-  onClickCancel?: () => void;
-  onClickConfirm: () => void;
-}) {
+}: ModalPropsType) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {

@@ -10,6 +10,7 @@ import Profile from '@/components/module/User/Profile';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { PostData } from '@/types/components/post';
+import { useModal } from '@/hooks/common/useModal';
 
 export default function PostWrite({
   onSubmit,
@@ -20,11 +21,13 @@ export default function PostWrite({
     },
   ) => void;
 }) {
+  const { openConfirmModal } = useModal();
   const userProfile = useSelector((state: RootState) => state.user.users);
   const [postContent, setPostContent] = useState('');
   const [previewData, setPreviewData] = useState<FileData[]>([]);
   const [deletedFiles, setDeletedFiles] = useState<number[]>([]);
   const [isChecked, setIsChecked] = useState(false);
+
   const handlePostContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setPostContent(e.target.value);
   };
@@ -46,6 +49,15 @@ export default function PostWrite({
   };
 
   const handlePost = async () => {
+    openConfirmModal({
+      modalText: '게시물을 등록하시겠습니까?',
+      onConfirm: () => {
+        submitPost();
+      },
+    });
+  };
+
+  const submitPost = () => {
     const params = {
       content: postContent,
       files: previewData,

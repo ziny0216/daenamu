@@ -102,6 +102,10 @@ const StyledButton = styled('button').withConfig({
         ? null
         : btnColor[color]?.hover};
   }
+
+  span {
+    line-height: 1;
+  }
 `;
 const StyledButtonIcon = styled('span').withConfig({
   shouldForwardProp: prop => prop !== 'isIcon',

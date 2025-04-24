@@ -1,28 +1,21 @@
+'use client';
+
+import { useModal } from '@/hooks/common/useModal';
 import Modal from '@/components/modal/Modal';
+import { RootState } from '@/lib/store';
+import { useSelector } from 'react-redux';
 import styles from './Modal.module.css';
 
-export default function ConfirmModal({
-  isOpen,
-  cancelText = '취소',
-  confirmText = '확인',
-  modalText,
-  onClickCancel,
-  onClickConfirm,
-}: {
-  isOpen: boolean;
-  cancelText?: string;
-  confirmText?: string;
-  modalText: string;
-  onClickCancel?: () => void;
-  onClickConfirm: () => void;
-}) {
+export default function ConfirmModal() {
+  const { isOpen, cancelText, confirmText, modalText } = useSelector(
+    (state: RootState) => state.modal,
+  );
+  const { closeConfirmModal, executeConfirm } = useModal();
+
   return (
     <Modal
-      onClickCancel={onClickCancel}
-      onClickConfirm={() => {
-        onClickCancel?.();
-        onClickConfirm();
-      }}
+      onClickCancel={closeConfirmModal}
+      onClickConfirm={executeConfirm}
       cancelText={cancelText}
       confirmText={confirmText}
       className={'confirm_modal'}
