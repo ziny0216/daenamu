@@ -11,12 +11,17 @@
     padding-top: 0;
 }
 
+.post_container .pf_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .post_container .post_content {
     font-size: var(--font-size-md);
     line-height: var(--line-height-md);
     color: var(--foreground);
 }
-
 
 .action_box {
     display: flex;
@@ -64,3 +69,4 @@
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-lg);
 }
+

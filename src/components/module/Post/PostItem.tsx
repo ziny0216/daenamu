@@ -4,6 +4,8 @@ import PostImageList from '@/components/module/Post/PostImageList';
 import Link from 'next/link';
 import { PostWithImages, PostWriter } from '@/types/components/post';
 import Profile from '@/components/module/User/Profile';
+import Button from '@/components/common/Button';
+import MoreIcon from '@/assets/icons/icon-more.svg';
 
 export default function PostItem({
   type,
@@ -16,7 +18,10 @@ export default function PostItem({
 }) {
   return (
     <div className={styles.post_container}>
-      <Profile is_anonymity={post.is_anonymity} profile={post.user} />
+      <div className={styles.pf_header}>
+        <Profile is_anonymity={post.is_anonymity} profile={post.user} />
+        <Button icon={<MoreIcon />} isIcon color={'transparent'} />
+      </div>
       <div className={styles.post_content}>
         <Link
           href={`/post/${post.id}`}
