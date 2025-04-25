@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { usePostList } from '@/hooks/post/usePostList';
+import TooltipProvider from '@/components/provider/TooltipProvider';
 
 export default function PostList({ keyword }: { keyword?: string }) {
   const pathName = usePathname();
@@ -20,16 +21,18 @@ export default function PostList({ keyword }: { keyword?: string }) {
 
   return (
     <>
-      {!keyword && <PostWrite onSubmit={submitPost} />}
-      <PostHeader postCount={postCnt} type={keyword ? 'search' : sortType} />
-      {postList.map(post => (
-        <PostItem
-          key={post.id}
-          type={'list'}
-          post={post}
-          viewerId={userProfile.id}
-        />
-      ))}
+      <TooltipProvider>
+        {!keyword && <PostWrite onSubmit={submitPost} />}
+        <PostHeader postCount={postCnt} type={keyword ? 'search' : sortType} />
+        {postList.map(post => (
+          <PostItem
+            key={post.id}
+            type={'list'}
+            post={post}
+            viewerId={userProfile.id}
+          />
+        ))}
+      </TooltipProvider>
     </>
   );
 }

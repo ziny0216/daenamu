@@ -1,7 +1,9 @@
-import {
+import React, {
   ButtonHTMLAttributes,
+  Dispatch,
   InputHTMLAttributes,
   ReactNode,
+  SetStateAction,
   TextareaHTMLAttributes,
 } from 'react';
 
@@ -25,7 +27,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'xs' | 'sm' | 'md' | 'lg';
   borderradius?: 'lg' | 'md';
   color?: 'default' | 'transparent' | 'foreground' | 'decoration' | 'warn';
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   isIcon?: boolean;
   icon?: ReactNode;
 }
@@ -48,3 +50,15 @@ export interface DefaultObj {
 export interface FormErrors {
   [key: string]: string | undefined;
 }
+
+export type TooltipState = {
+  visible: boolean;
+  list: DefaultObj[];
+  position: { x: number; y: number };
+};
+
+export type TooltipContextType = {
+  tooltipState: TooltipState;
+  setTooltipState: Dispatch<SetStateAction<TooltipState>>;
+  selectedItem: DefaultObj | null;
+};
