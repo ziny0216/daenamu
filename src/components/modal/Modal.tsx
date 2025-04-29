@@ -54,14 +54,14 @@ export default function Modal({
 
         <div className={`${styles.modal_footer} btn_group full`}>
           {cancelText && (
-            <Button
-              size={'md'}
-              color={'warn'}
-              title={cancelText}
-              onClick={onClickCancel}
-            />
+            <Button size={'md'} title={cancelText} onClick={onClickCancel} />
           )}
-          <Button size={'md'} title={confirmText} onClick={onClickConfirm} />
+          <Button
+            size={'md'}
+            title={confirmText}
+            onClick={onClickConfirm}
+            color={'warn'}
+          />
         </div>
       </dialog>,
       document.getElementById('modal') as HTMLElement,

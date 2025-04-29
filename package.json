@@ -20,7 +20,7 @@
     "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
     "styled-components": "^6.1.14",
-    "supabase": "^2.20.12",
+    "supabase": "^2.22.6",
     "vercel": "^41.6.2"
   },
   "devDependencies": {

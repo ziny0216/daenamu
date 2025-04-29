@@ -10,7 +10,7 @@ import React, {
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   id?: string;
-  color?: 'default' | 'bottomBorder';
+  color?: 'default' | 'bottomBorder' | 'dark';
   inputSize?: 'sm' | 'md';
   isButton?: boolean;
   children?: ReactNode;

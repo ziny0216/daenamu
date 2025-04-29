@@ -30,13 +30,15 @@ export default function PostItem({
     <div className={styles.post_container}>
       <div className={styles.pf_header}>
         <Profile is_anonymity={post.is_anonymity} profile={post.user} />
-        <Button
-          className={'tooltip_trigger'}
-          onClick={handleMore}
-          icon={<MoreIcon />}
-          isIcon
-          color={'transparent'}
-        />
+        {post.user?.nickname !== '탈퇴한 사용자' && (
+          <Button
+            className={'tooltip_trigger'}
+            onClick={handleMore}
+            icon={<MoreIcon />}
+            isIcon
+            color={'transparent'}
+          />
+        )}
       </div>
       <div className={styles.post_content}>
         <Link

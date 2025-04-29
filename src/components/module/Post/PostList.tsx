@@ -10,10 +10,15 @@ import { useTooltip } from '@/components/common/Tooltip';
 import React, { useEffect, useState } from 'react';
 import { PostWithImages, PostWriter } from '@/types/components/post';
 import { useModal } from '@/hooks/common/useModal';
+import ReportModal from '@/components/modal/ReportModal';
+import { ReportReasonType } from '@/types/components/module';
+import browserClient from '@/utils/supabaseClient';
+import { toast } from 'react-toastify';
 
 export default function PostList({ keyword }: { keyword?: string }) {
   const pathName = usePathname();
   const sortType = pathName.includes('/hot') ? 'popular' : 'recent';
+  const [isReportModal, setIsReportModal] = useState(false);
   const userProfile = useSelector((state: RootState) => state.user.users);
   const { postList, submitPost, postCnt, deletePost } = usePostList({
     userProfile,
@@ -36,6 +41,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
       y: rect.bottom + window.scrollY + 12,
     };
     setPostId(post.id);
+
     let defaultList = [{ name: '신고하기', value: 'report' }];
     defaultList =
       userProfile.id === post.user?.user_id
@@ -53,8 +59,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
       tooltipState.position.x === position.x &&
       tooltipState.position.y === position.y
     ) {
-      setTooltipState(prev => ({ ...prev, visible: false }));
-      return;
+      return setTooltipState(prev => ({ ...prev, visible: false }));
     }
     setTooltipState({
       visible: true,
@@ -73,12 +78,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
       });
     }
     if (selectedItem?.value === 'report') {
-      openConfirmModal({
-        modalText: '신고하시겠습니까?',
-        onConfirm: async () => {
-          console.log('신고');
-        },
-      });
+      setIsReportModal(true);
     }
 
     if (selectedItem?.value === 'delete') {
@@ -90,6 +90,31 @@ export default function PostList({ keyword }: { keyword?: string }) {
       });
     }
   }, [selectedItem]);
+
+  const handleConfirm = async (report: ReportReasonType) => {
+    setIsReportModal(false);
+
+    openConfirmModal({
+      modalText: '신고하시겠습니까?',
+      onConfirm: async () => {
+        const { error } = await browserClient.from('reports').insert({
+          target_type: 'post',
+          target_id: postId,
+          reporter_id: userProfile.id,
+          ...report,
+        });
+
+        if (error) {
+          if (error.code === '23505') {
+            return toast('이미 신고되었습니다.');
+          }
+          return toast(error.message);
+        }
+
+        toast('신고되었습니다.');
+      },
+    });
+  };
   return (
     <>
       {!keyword && <PostWrite onSubmit={submitPost} />}
@@ -103,6 +128,11 @@ export default function PostList({ keyword }: { keyword?: string }) {
           viewerId={userProfile.id}
         />
       ))}
+      <ReportModal
+        onClickCancel={() => setIsReportModal(false)}
+        isReportModal={isReportModal}
+        handleConfirm={handleConfirm}
+      />
     </>
   );
 }

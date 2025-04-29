@@ -17,7 +17,7 @@
     justify-content: flex-end;
     position: fixed;
     max-width: 500px;
-    width: 100%;
+    width: calc(100% - 32px);
     left: 50%;
     transform: translateX(-50%);
     background-color: #fff;
@@ -70,10 +70,38 @@
 }
 
 .confirm_box {
-
     font-size: var(--font-size-md);
     line-height: var(--line-height-md);
     font-weight: var(--font-weight-m);
+}
 
+/* 신고 */
+.report_modal .select_box {
+    position: relative;
+
+}
+
+.report_modal .select_box svg {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+}
+
+.report_modal .select_box select {
+    appearance: none;
+    width: 100%;
+    padding: 8px 32px 8px 8px;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--default-200);
+    border-radius: var(--border-radius-sm);
+    color: var(--default-50);
+}
+
+.report_modal .input_box {
+    margin-top: 8px;
 }
 

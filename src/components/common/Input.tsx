@@ -20,6 +20,11 @@ const inputColor = {
     border: '1px solid var(--default-200)',
     backgroundColor: 'var(--background-color)',
   },
+  dark: {
+    border: '1px solid var(--default-200)',
+    backgroundColor: 'var(--background-color)',
+    color: 'var(--default-100)',
+  },
   bottomBorder: {
     borderRadius: 0,
     borderBottom: '1px solid var(--default-200)',
@@ -55,7 +60,6 @@ export default function Input({
   id,
   type = 'text',
   children,
-
   ...props
 }: InputProps) {
   return (

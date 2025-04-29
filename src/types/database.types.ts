@@ -14,21 +14,27 @@ export type Database = {
           comment: string | null
           created_at: string
           id: number
+          is_hidden: boolean
           post_id: string
+          report_cnt: number
           user_id: string
         }
         Insert: {
           comment?: string | null
           created_at?: string
           id?: number
+          is_hidden?: boolean
           post_id?: string
+          report_cnt?: number
           user_id?: string
         }
         Update: {
           comment?: string | null
           created_at?: string
           id?: number
+          is_hidden?: boolean
           post_id?: string
+          report_cnt?: number
           user_id?: string
         }
         Relationships: [
@@ -120,7 +126,9 @@ export type Database = {
           created_at: string
           id: string
           is_anonymity: boolean
+          is_hidden: boolean
           like_cnt: number
+          report_cnt: number
           user_id: string | null
         }
         Insert: {
@@ -129,7 +137,9 @@ export type Database = {
           created_at?: string
           id?: string
           is_anonymity: boolean
+          is_hidden?: boolean
           like_cnt?: number
+          report_cnt?: number
           user_id?: string | null
         }
         Update: {
@@ -138,13 +148,53 @@ export type Database = {
           created_at?: string
           id?: string
           is_anonymity?: boolean
+          is_hidden?: boolean
           like_cnt?: number
+          report_cnt?: number
           user_id?: string | null
         }
         Relationships: [
           {
             foreignKeyName: "posts_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reports: {
+        Row: {
+          created_at: string
+          id: number
+          reason: string
+          reason_memo: string | null
+          reporter_id: string
+          target_id: string
+          target_type: Database["public"]["Enums"]["report_enum"]
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          reason: string
+          reason_memo?: string | null
+          reporter_id?: string
+          target_id?: string
+          target_type: Database["public"]["Enums"]["report_enum"]
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          reason?: string
+          reason_memo?: string | null
+          reporter_id?: string
+          target_id?: string
+          target_type?: Database["public"]["Enums"]["report_enum"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_reporter_id_fkey"
+            columns: ["reporter_id"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -224,7 +274,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      report_enum: "post" | "comment"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -339,6 +389,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      report_enum: ["post", "comment"],
+    },
   },
 } as const
