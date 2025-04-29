@@ -94,5 +94,19 @@ export const usePostList = ({
     };
     fetchSearchPostCnt();
   }, [keyword]);
-  return { postList, submitPost, postCnt };
+
+  //게시물 삭제
+  const deletePost = async (postId: string) => {
+    const { error } = await browserClient
+      .from('posts')
+      .delete()
+      .eq('id', postId);
+    if (error) {
+      toast(error.message);
+    } else {
+      toast('삭제되었습니다!');
+      setPostList(prev => prev.filter(post => post.id !== postId));
+    }
+  };
+  return { postList, submitPost, postCnt, deletePost };
 };

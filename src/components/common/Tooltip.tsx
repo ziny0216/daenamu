@@ -46,7 +46,7 @@ export default function Tooltip({
   onClick: (item: DefaultObj) => void;
 }) {
   const tooltipRef = useRef<HTMLUListElement>(null);
-  const { setTooltipState } = useTooltip();
+  const { setTooltipState, tooltipState } = useTooltip();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -60,7 +60,7 @@ export default function Tooltip({
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [setTooltipState]);
+  }, [tooltipState]);
 
   return (
     <TooltipWrapper
