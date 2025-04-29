@@ -45,7 +45,6 @@ export default function PostList({ keyword }: { keyword?: string }) {
               name: '수정하기',
               value: 'edit',
             },
-            ...defaultList,
           ]
         : defaultList;
 

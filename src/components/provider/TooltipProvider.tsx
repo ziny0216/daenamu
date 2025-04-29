@@ -1,5 +1,5 @@
 'use client';
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { DefaultObj, TooltipContextType } from '@/types/components/common';
 import Tooltip from '@/components/common/Tooltip';
 
@@ -16,6 +16,13 @@ export default function TooltipProvider({ children }: { children: ReactNode }) {
   });
 
   const [selectedItem, setSelectedItem] = useState<DefaultObj | null>(null);
+
+  useEffect(() => {
+    if (!tooltipState.visible && selectedItem) {
+      setSelectedItem(null);
+    }
+  }, [selectedItem, tooltipState.visible]);
+
   return (
     <TooltipContext.Provider
       value={{
