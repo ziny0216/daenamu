@@ -17,13 +17,13 @@ export default function PostItem({
   type: 'list' | 'detail';
   post: PostWithImages & PostWriter;
   viewerId?: string;
-  handlePostMore: (
+  handlePostMore?: (
     e: React.MouseEvent<HTMLButtonElement>,
     post: PostWithImages & PostWriter,
   ) => void;
 }) {
   const handleMore = (e: React.MouseEvent<HTMLButtonElement>) => {
-    handlePostMore(e, post);
+    handlePostMore?.(e, post);
   };
 
   return (
