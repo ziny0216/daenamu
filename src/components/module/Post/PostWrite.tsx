@@ -9,17 +9,23 @@ import { FileData } from '@/types/components/common';
 import Profile from '@/components/module/User/Profile';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
-import { PostData } from '@/types/components/post';
+import { PostData, PostWithImages } from '@/types/components/post';
 import { useModal } from '@/hooks/common/useModal';
 
 export default function PostWrite({
   onSubmit,
+  isEdit,
+  postData,
 }: {
   onSubmit: (
     params: PostData & {
       files: FileData[];
+      deleteIds?: number[];
+      id?: string;
     },
   ) => void;
+  isEdit?: boolean;
+  postData?: PostWithImages;
 }) {
   const { openConfirmModal } = useModal();
   const userProfile = useSelector((state: RootState) => state.user.users);
@@ -32,17 +38,13 @@ export default function PostWrite({
     setPostContent(e.target.value);
   };
 
-  useEffect(() => {
-    console.log(deletedFiles);
-  }, [deletedFiles]);
-
   const setProfileData = (data: FileData[]) => {
     setPreviewData(prev => [...prev, ...data]);
   };
 
-  const handleDelete = (idx: number) => {
-    if (idx) {
-      setDeletedFiles(prev => [...prev, idx]);
+  const handleDelete = (idx: number, id: number) => {
+    if (id) {
+      setDeletedFiles(prev => [...prev, id]);
     }
 
     setPreviewData(prev => prev.filter((_, index) => index !== idx));
@@ -50,7 +52,9 @@ export default function PostWrite({
 
   const handlePost = async () => {
     openConfirmModal({
-      modalText: '게시물을 등록하시겠습니까?',
+      modalText: isEdit
+        ? '게시물을 수정하시겠습니까?'
+        : '게시물을 등록하시겠습니까?',
       onConfirm: () => {
         submitPost();
       },
@@ -63,15 +67,27 @@ export default function PostWrite({
       files: previewData,
       is_anonymity: isChecked,
       user_id: userProfile.id,
+      ...(isEdit && { deleteIds: deletedFiles, id: postData?.id }),
     };
     onSubmit(params);
     setPostContent('');
     setPreviewData([]);
     setIsChecked(false);
   };
+
+  useEffect(() => {
+    if (!postData) return;
+    setPostContent(postData.content);
+    setPreviewData(postData.images);
+    setIsChecked(postData.is_anonymity);
+  }, [postData]);
+
   return (
     <div className={styles.post_container}>
-      <Profile profile={userProfile} is_anonymity={false} />
+      <Profile
+        profile={userProfile}
+        is_anonymity={isEdit ? isChecked : false}
+      />
       <Textarea
         inputSize={'md'}
         rows={2}
@@ -81,6 +97,7 @@ export default function PostWrite({
       />
       <PostImageList onDeleteImg={handleDelete} files={previewData} />
       <PostActionBar
+        isEdit={isEdit}
         isChecked={isChecked}
         onChange={(checked: boolean) => setIsChecked(checked)}
         handlePost={handlePost}

@@ -179,7 +179,7 @@ export type Database = {
           reason: string
           reason_memo?: string | null
           reporter_id?: string
-          target_id?: string
+          target_id: string
           target_type: Database["public"]["Enums"]["report_enum"]
         }
         Update: {

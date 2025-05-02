@@ -51,18 +51,21 @@ export default function Modal({
         <div className={`${styles.modal_body} ${isShowHeader && styles.lg}`}>
           <div className={styles.modal_inner}>{children}</div>
         </div>
-
-        <div className={`${styles.modal_footer} btn_group full`}>
-          {cancelText && (
-            <Button size={'md'} title={cancelText} onClick={onClickCancel} />
-          )}
-          <Button
-            size={'md'}
-            title={confirmText}
-            onClick={onClickConfirm}
-            color={'warn'}
-          />
-        </div>
+        {(cancelText || confirmText) && (
+          <div className={`${styles.modal_footer} btn_group full`}>
+            {cancelText && (
+              <Button size={'md'} title={cancelText} onClick={onClickCancel} />
+            )}
+            {confirmText && (
+              <Button
+                size={'md'}
+                title={confirmText}
+                onClick={onClickConfirm}
+                color={'warn'}
+              />
+            )}
+          </div>
+        )}
       </dialog>,
       document.getElementById('modal') as HTMLElement,
     )

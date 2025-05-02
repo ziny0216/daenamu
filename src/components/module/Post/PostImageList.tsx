@@ -12,7 +12,7 @@ export default function PostImageList({
   listType = 'add',
 }: {
   files?: FileData[] | Tables<'post_images'>[];
-  onDeleteImg?: (idx: number) => void;
+  onDeleteImg?: (idx: number, id: number) => void;
   listType?: 'list' | 'add';
 }) {
   return (
@@ -26,7 +26,7 @@ export default function PostImageList({
                 isIcon
                 color={'transparent'}
                 icon={<DeleteBtn />}
-                onClick={() => onDeleteImg && onDeleteImg(index)}
+                onClick={() => onDeleteImg && onDeleteImg(index, item.id ?? 0)}
               />
             )}
             <Image

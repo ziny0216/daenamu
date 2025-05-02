@@ -14,7 +14,9 @@ export default function PostWriteActionBar({
   handlePost,
   isChecked,
   onChange,
+  isEdit = false,
 }: {
+  isEdit?: boolean;
   disabled: boolean;
   setProfileData: (file: FileData[]) => void;
   handlePost: () => void;
@@ -31,7 +33,7 @@ export default function PostWriteActionBar({
   return (
     <div className={styles.action_box}>
       <FileInput
-        id={'postImg'}
+        id={isEdit ? 'editPostImg' : 'postImg'}
         icon={<PictureIcon />}
         handleFileChange={handleFileChange}
       />
@@ -45,8 +47,9 @@ export default function PostWriteActionBar({
         <LoadingButton
           onClick={handlePost}
           disabled={disabled}
+          color={isEdit ? 'warn' : 'default'}
           size={'sm'}
-          title={'POST'}
+          title={isEdit ? '수정' : 'POST'}
         ></LoadingButton>
       </div>
     </div>

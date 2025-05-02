@@ -1,6 +1,6 @@
 import { PostData, PostWithImages, PostWriter } from '@/types/components/post';
 import { FileData } from '@/types/components/common';
-import { uploadPost } from '@/utils/file/uploadPostImages';
+import { updatePost, uploadPost } from '@/utils/file/uploadPostImages';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import browserClient from '@/utils/supabaseClient';
@@ -22,6 +22,28 @@ export const usePostList = ({
   const [postList, setPostList] = useState<(PostWithImages & PostWriter)[]>([]);
   const [postCnt, setPostCnt] = useState(0);
 
+  const submitEditPost = async (
+    params: PostData & {
+      files: FileData[];
+      deleteIds?: number[];
+      id?: string;
+    },
+  ) => {
+    const { post, images } = await updatePost(params);
+    console.log(images);
+    setPostList(prev =>
+      prev.map(item => {
+        return item.id === params.id
+          ? {
+              ...item,
+              ...post,
+              images,
+            }
+          : item;
+      }),
+    );
+    toast('게시물이 수정되었습니다.');
+  };
   // 게시글 작성
   const submitPost = async (
     params: PostData & {
@@ -30,6 +52,7 @@ export const usePostList = ({
   ) => {
     try {
       const { post, images } = await uploadPost(params);
+
       setPostList(prev => [
         {
           ...post,
@@ -108,5 +131,5 @@ export const usePostList = ({
       setPostList(prev => prev.filter(post => post.id !== postId));
     }
   };
-  return { postList, submitPost, postCnt, deletePost };
+  return { postList, submitPost, postCnt, deletePost, submitEditPost };
 };

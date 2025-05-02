@@ -10,7 +10,7 @@ export interface ModalPropsType {
   isShowHeader?: boolean; // 모달 헤더 노출 유무
   onClose?: () => void; // 모달 닫기 함수
   onClickCancel?: () => void; // 취소 버튼 함수
-  onClickConfirm: () => void; // 확인 버튼 함수
+  onClickConfirm?: () => void; // 확인 버튼 함수
   modalText?: string; // confirm,alert text
 }
 

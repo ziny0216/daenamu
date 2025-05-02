@@ -33,8 +33,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export interface FileData {
-  image_url: string;
-  file: File;
+  file?: File;
+  image_url: string | null;
+  id?: number;
 }
 
 export interface FileDelete {

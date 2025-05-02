@@ -14,21 +14,25 @@ import ReportModal from '@/components/modal/ReportModal';
 import { ReportReasonType } from '@/types/components/module';
 import browserClient from '@/utils/supabaseClient';
 import { toast } from 'react-toastify';
+import PostEditModal from '@/components/modal/PostEditModal';
 
 export default function PostList({ keyword }: { keyword?: string }) {
   const pathName = usePathname();
   const sortType = pathName.includes('/hot') ? 'popular' : 'recent';
-  const [isReportModal, setIsReportModal] = useState(false);
   const userProfile = useSelector((state: RootState) => state.user.users);
-  const { postList, submitPost, postCnt, deletePost } = usePostList({
-    userProfile,
-    sortType,
-    only_mine: false,
-    keyword: keyword,
-  });
-  const [postId, setPostId] = useState('');
+  const { postList, submitPost, submitEditPost, postCnt, deletePost } =
+    usePostList({
+      userProfile,
+      sortType,
+      only_mine: false,
+      keyword: keyword,
+    });
   const { setTooltipState, tooltipState, selectedItem } = useTooltip();
   const { openConfirmModal } = useModal();
+  const [isReportModal, setIsReportModal] = useState(false);
+  const [isPostEditModal, setIsPostEditModa] = useState(false);
+  const [postId, setPostId] = useState('');
+  const [targetPost, setTargetPost] = useState<PostWithImages>();
 
   const handlePostMore = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -70,12 +74,11 @@ export default function PostList({ keyword }: { keyword?: string }) {
 
   useEffect(() => {
     if (selectedItem?.value === 'edit') {
-      openConfirmModal({
-        modalText: '수정하시겠습니까?',
-        onConfirm: async () => {
-          console.log('수정');
-        },
-      });
+      const targetPost = postList.find(edit => edit.id === postId);
+      if (targetPost) {
+        setTargetPost(targetPost);
+      }
+      setIsPostEditModa(true);
     }
     if (selectedItem?.value === 'report') {
       setIsReportModal(true);
@@ -115,6 +118,7 @@ export default function PostList({ keyword }: { keyword?: string }) {
       },
     });
   };
+
   return (
     <>
       {!keyword && <PostWrite onSubmit={submitPost} />}
@@ -132,6 +136,15 @@ export default function PostList({ keyword }: { keyword?: string }) {
         onClickCancel={() => setIsReportModal(false)}
         isReportModal={isReportModal}
         handleConfirm={handleConfirm}
+      />
+      <PostEditModal
+        onSubmitEditPost={params => {
+          submitEditPost(params);
+          setIsPostEditModa(false);
+        }}
+        onClickCancel={() => setIsPostEditModa(false)}
+        isPostEditModal={isPostEditModal}
+        postData={targetPost}
       />
     </>
   );

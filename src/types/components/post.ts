@@ -30,7 +30,8 @@ export type PostWriter = {
     avatar_url: string | null;
   } | null;
 };
+
 export type PostWithImages = Tables<'posts'> & {
-  images: Tables<'post_images'>[];
+  images: Partial<Tables<'post_images'>>[];
   is_like: boolean;
 };
