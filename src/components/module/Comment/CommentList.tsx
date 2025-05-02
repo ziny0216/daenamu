@@ -107,10 +107,26 @@ export default function CommentList({
     if (selectedItem?.value === 'delete') {
       openConfirmModal({
         modalText: '삭제하시겠습니까?',
-        onConfirm: async () => {},
+        onConfirm: async () => {
+          await deletePost();
+        },
       });
     }
   }, [selectedItem]);
+
+  const deletePost = async () => {
+    if (!cmtId) return;
+    const { error } = await browserClient
+      .from('comments')
+      .delete()
+      .eq('id', cmtId);
+    if (error) {
+      toast(error.message);
+    } else {
+      toast('삭제되었습니다!');
+      setCommentList(prev => prev.filter(post => post.id !== postId));
+    }
+  };
 
   const handleConfirm = async (report: ReportReasonType) => {
     setIsReportModal(false);
