@@ -18,7 +18,10 @@ export default function UserProfileImage({
   const [preview, setPreview] = useState(initialProfile ?? null);
   const handleProfileFile = (files: FileData[]) => {
     if (!files) return;
-    setProfileData(files[0].file);
+    if (files[0]?.file) {
+      setProfileData(files[0]?.file);
+    }
+
     setPreview(files[0].image_url);
   };
 

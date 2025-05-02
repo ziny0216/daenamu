@@ -1,4 +1,5 @@
 import { Tables } from '@/types/database.types';
+import { FileData } from '@/types/components/common';
 
 export type PostDetail = {
   id: string;
@@ -32,6 +33,6 @@ export type PostWriter = {
 };
 
 export type PostWithImages = Tables<'posts'> & {
-  images: Partial<Tables<'post_images'>>[];
+  images: FileData[] | Tables<'post_images'>[];
   is_like: boolean;
 };
