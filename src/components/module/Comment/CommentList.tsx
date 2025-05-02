@@ -124,7 +124,7 @@ export default function CommentList({
       toast(error.message);
     } else {
       toast('삭제되었습니다!');
-      setCommentList(prev => prev.filter(post => post.id !== postId));
+      setCommentList(prev => prev.filter(cmt => cmt.id !== cmtId));
     }
   };
 
